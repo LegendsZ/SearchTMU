@@ -1,16 +1,18 @@
 #include <iostream>
 
-char** generateMaze(const int& x, const int& y);
+
+char** generateMaze(const unsigned int& x, const unsigned int& y, const unsigned int& debrisChance);
 void printGrid(const int& x, const int& y, char** grid);
 
 int main() {
 	system("title SearchTMU");
-
+	srand(time(0));
 	const unsigned int x = 20;
 	const unsigned int y = 20;
+	const unsigned int debrisChance = 10;
 	char** grid = nullptr;
-	
-	grid = generateMaze(x, y);
+
+	grid = generateMaze(x, y, debrisChance);
 	printGrid(x,y,grid);
 
 	//garbage collection below
@@ -23,31 +25,50 @@ int main() {
 }
 
 
-char** generateMaze(const int& x, const int& y) {
+char** generateMaze(const unsigned int& x, const unsigned int& y, const unsigned int& debrisChance) {
 	char** grid = new char*[y];
+
+	unsigned int iter = rand() % (2 * x + 2 * y - 2);
+	unsigned int iterCtr = 0;
 
 	for (int i = 0; i < y; i++) {
 		grid[i] = new char[x];
 		for (int q = 0; q < x; q++) {
-			grid[i][q] = '-';
+			if (i == 0 || i==y-1) {
+				if (iterCtr++ == iter) {
+					grid[i][q] = ' ';
+				}
+				else {
+					grid[i][q] = '-';
+				}
+			}
+			else if (q == 0 || q== x-1) {
+				if (iterCtr++ == iter) {
+					grid[i][q] = ' ';
+				}
+				else {
+					grid[i][q] = '|';
+				}
+			}
+			else {
+				if (rand() % 100 >= debrisChance) {
+					grid[i][q] = ' ';
+				}
+				else {
+					grid[i][q] = '#';
+				}
+			}
 		}
 	}
 
-	/*for (int i = 0; i < x; i++) {
-		std::cout << "-";
-	}
-	for (int i = 0; i < y - 2; i++) {
-		std::cout << "\n|";
-		for (int q = 0; q < x - 2; q++) {
-			std::cout << " ";
+	while (true) {
+		unsigned int xp = rand() % x;
+		unsigned int yp = rand() % y;
+		if (grid[yp][xp] == ' ') {
+			grid[yp][xp] = 'X';
+			break;
 		}
-		std::cout << "|";
 	}
-	std::cout << "\n";
-	for (int i = 0; i < x; i++) {
-		std::cout << "-";
-	}
-	std::cout << "\n";*/
 
 	return grid;
 }
