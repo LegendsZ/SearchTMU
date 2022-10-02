@@ -1,6 +1,10 @@
-﻿  Source.cpp
-C:\Users\WINDOWS\Documents\GitHub\SearchTMU\SearchTMU\SearchTMU\Source.cpp(9,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\WINDOWS\Documents\GitHub\SearchTMU\SearchTMU\SearchTMU\Source.cpp(34,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\WINDOWS\Documents\GitHub\SearchTMU\SearchTMU\SearchTMU\Source.cpp(36,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\WINDOWS\Documents\GitHub\SearchTMU\SearchTMU\SearchTMU\Source.cpp(54,22): warning C4018: '>=': signed/unsigned mismatch
+﻿  schedule.cpp
+  searchAlgorithm.cpp
+C:\Users\WINDOWS\Documents\GitHub\SearchTMU\SearchTMU\SearchTMU\searchAlgorithm.cpp(7,20): warning C4018: '<': signed/unsigned mismatch
+  Source.cpp
+C:\Users\WINDOWS\Documents\GitHub\SearchTMU\SearchTMU\SearchTMU\Source.cpp(21,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\WINDOWS\Documents\GitHub\SearchTMU\SearchTMU\SearchTMU\Source.cpp(119,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\WINDOWS\Documents\GitHub\SearchTMU\SearchTMU\SearchTMU\Source.cpp(121,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\WINDOWS\Documents\GitHub\SearchTMU\SearchTMU\SearchTMU\Source.cpp(129,22): warning C4018: '>=': signed/unsigned mismatch
+  Generating Code...
   SearchTMU.vcxproj -> C:\Users\WINDOWS\Documents\GitHub\SearchTMU\SearchTMU\x64\Debug\SearchTMU.exe
