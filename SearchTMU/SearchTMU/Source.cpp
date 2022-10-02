@@ -72,6 +72,15 @@ void menu() {
 		else if (input == "schedule") {
 			//view schedule
 		}
+		else if (input == "generate") {
+			const unsigned int x = 20;
+			const unsigned int y = 20;
+			const unsigned int debrisChance = 10;
+			char** grid = nullptr;
+
+			grid = generateMaze(x, y, debrisChance);
+			printGrid(x, y, grid);
+		}
 		else {
 			std::cout << "Error: Unrecognized command!\n";
 			system("pause");
