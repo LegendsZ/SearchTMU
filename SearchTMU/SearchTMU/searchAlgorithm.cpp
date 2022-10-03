@@ -1,6 +1,6 @@
 #include "searchAlgorithm.h"
 
-char** searchAlgorithm::getPath(char** grid, int x,  int y)
+char** searchAlgorithm::getPath(char** grid, unsigned const int& x, unsigned const int& y)
 {
 	return nextDirection(grid, x, y);
 }

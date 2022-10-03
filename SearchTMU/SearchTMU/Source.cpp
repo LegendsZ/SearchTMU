@@ -57,8 +57,9 @@ void menu() {
 		std::cout << "\
          commands\n\
 'exit' -> exit SearchTMU\n\
-'settings' -> open settings\
-'schedule' -> view schedule";
+'settings' -> open settings\n\
+'schedule' -> view schedule\n\
+'generate' -> generate route";
 		std::cout << "\n\n\n";
 		std::cout << ">";
 		std::string input;
@@ -80,6 +81,7 @@ void menu() {
 
 			grid = generateMaze(x, y, debrisChance);
 			printGrid(x, y, grid);
+			system("pause");
 		}
 		else {
 			std::cout << "Error: Unrecognized command!\n";
