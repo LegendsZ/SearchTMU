@@ -4,9 +4,30 @@ path::path(std::vector<coordinate*> coordinates): coordinates(coordinates)
 {
 }
 
+path::path(): coordinates(std::vector<coordinate*>())
+{
+}
+
 bool path::addCoordinate(coordinate* coord)
 {
 	coordinates.push_back(coord);
+	return true;
+}
+
+bool path::removeCoordinate(coordinate* coord)
+{
+	int ind = -1;
+	for (int i = 0; i < coordinates.size(); i++) {
+		if (coordinates[i]->x == coord->x && coordinates[i]->y == coord->y) {
+			ind = i;
+			break;
+		}
+	}
+	if (ind == -1) {//errorcheck
+		return false;
+	}
+
+	coordinates.erase(coordinates.begin() + ind);
 	return true;
 }
 

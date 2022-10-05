@@ -1,7 +1,9 @@
 #include "searchAlgorithm.h"
+path searchAlgorithm::myPath;
 
-char** searchAlgorithm::getPath(char** grid, unsigned const int& x, unsigned const int& y)
+char** searchAlgorithm::getPath(char** grid, unsigned int& x, unsigned int& y)
 {
+	searchAlgorithm::myPath.addCoordinate(new coordinate(x, y));
 	return nextDirection(grid, x, y);
 }
 ///APPROACH 1: Brute Force 
@@ -9,24 +11,28 @@ char** searchAlgorithm::nextDirection(char** grid, int x, int y)
 {
 
 	// Check if target is within range, if true then return grid 
-	if (grid[x - 1][y] == 'D')
+	if (grid[y - 1][x] == 'D')
 	{
+		grid[y][x] = 'L';
 		return grid;
 	}
-	if (grid[x][y - 1] == 'D')
+	if (grid[y][x - 1] == 'D')
 	{
+		grid[y][x] = 'L';
 		return grid;
 	}
-	if (grid[x + 1][y] == 'D')
+	if (grid[y + 1][x] == 'D')
 	{
+		grid[y][x] = 'L';
 		return grid;
 	}
-	if (grid[x][y + 1] == 'D')
+	if (grid[y][x + 1] == 'D')
 	{
+		grid[y][x] = 'L';
 		return grid;
 	}
 
-	if (grid[x - 1][y] == ' ')
+	if (grid[x - 1][y] == ' ') //still gotta change this line and below such that the grid is accessed by [y][x] instead of [x][y]
 	{
 		grid[x - 1][y] = '.';
 		char** tempgrid = nextDirection(grid, x - 1, y);

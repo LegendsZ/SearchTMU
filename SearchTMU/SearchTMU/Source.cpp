@@ -81,6 +81,19 @@ void menu() {
 
 			grid = generateMaze(x, y, debrisChance);
 			printGrid(x, y, grid);
+			std::cout << "\n\n";
+
+			int pX = 0;
+			int pY = 0;
+			for (int i = 0; i < y; i++) {
+				for (int j = 0; j < x; j++) {
+					if (grid[i][j] == 'X') {
+						pX = j;
+						pY = i;
+					}
+				}
+			}
+			printGrid(x, y, searchAlgorithm::getPath(grid, pX, pY));
 			system("pause");
 		}
 		else {
