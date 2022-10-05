@@ -10,9 +10,9 @@ void menu();
 void settings();
 
 
-const unsigned int x = 8;
-const unsigned int y = 8;
-const unsigned int debrisChance = 25;
+const unsigned int x = 20;
+const unsigned int y = 20;
+const unsigned int debrisChance = 10;
 char** grid;
 
 int main() {
@@ -74,17 +74,13 @@ void menu() {
 			//view schedule
 		}
 		else if (input == "generate") {
-			const unsigned int x = 20;
-			const unsigned int y = 20;
-			const unsigned int debrisChance = 10;
-			char** grid = nullptr;
 
 			grid = generateMaze(x, y, debrisChance);
 			printGrid(x, y, grid);
 			std::cout << "\n\n";
 
-			int pX = 0;
-			int pY = 0;
+			unsigned int pX = 0;
+			unsigned int pY = 0;
 			for (int i = 0; i < y; i++) {
 				for (int j = 0; j < x; j++) {
 					if (grid[i][j] == 'X') {
