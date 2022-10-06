@@ -10,8 +10,8 @@ void menu();
 void settings();
 
 
-const unsigned int x = 20;
-const unsigned int y = 20;
+const unsigned int x = 50;
+const unsigned int y = 50;
 const unsigned int debrisChance = 10;
 char** grid;
 
@@ -90,7 +90,10 @@ void menu() {
 				}
 			}
 			//printGrid(x, y, searchAlgorithm::getPath(grid, pX, pY));
-			printGrid(x, y, searchAlgorithm::getIntelligentPath(grid, x, y));
+			char** tempgrid = searchAlgorithm::getIntelligentPath(grid, x, y);
+			if (tempgrid == nullptr) { std::cout << "No solutions\n"; }
+			else printGrid(x, y, tempgrid);
+			//printGrid(x, y, searchAlgorithm::getIntelligentPath(grid, x, y);
 			system("pause");
 		}
 		else {
