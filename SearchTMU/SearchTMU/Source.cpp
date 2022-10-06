@@ -89,7 +89,8 @@ void menu() {
 					}
 				}
 			}
-			printGrid(x, y, searchAlgorithm::getPath(grid, pX, pY));
+			//printGrid(x, y, searchAlgorithm::getPath(grid, pX, pY));
+			printGrid(x, y, searchAlgorithm::getIntelligentPath(grid, x, y));
 			system("pause");
 		}
 		else {
