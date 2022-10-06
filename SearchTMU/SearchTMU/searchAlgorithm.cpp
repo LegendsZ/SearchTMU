@@ -127,7 +127,6 @@ char** searchAlgorithm::nextIntelligentDirection(char** grid, const int sizeX, c
 	if (abs(dX - pX) > abs(dY - pY)) {
 		if (dX == pX)
 		{
-
 		}
 		if (dX < pX) {
 			if (grid[pY][pX - 1] == ' ')
@@ -171,7 +170,7 @@ char** searchAlgorithm::nextIntelligentDirection(char** grid, const int sizeX, c
 			}
 			if (grid[pY - ystep][pX] == ' ')
 			{
-				grid[pY + 1][pX] = '.';
+				grid[pY - 1][pX] = '.';
 				char** tempgrid = nextIntelligentDirection(grid, sizeX, sizeY, pX, pY - ystep, dX, dY);
 				if (tempgrid == nullptr) { grid[pY - ystep][pX] = ' '; }
 				else return tempgrid;

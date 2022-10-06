@@ -10,14 +10,16 @@ void menu();
 void settings();
 
 
-const unsigned int x = 50;
-const unsigned int y = 50;
-const unsigned int debrisChance = 10;
+const unsigned int x = 1000;
+const unsigned int y = 1000;
+const unsigned int debrisChance = 0;
 char** grid;
 
 int main() {
 	system("title Projekt SearchTMU");
 	//initialization
+	//time_t x = time(0);
+	//std::cout << "\nSeed: " << x << "\n\n";
 	srand(time(0));
 	grid = nullptr;
 	grid = generateMaze(x, y, debrisChance);
