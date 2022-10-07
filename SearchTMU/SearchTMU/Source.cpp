@@ -18,7 +18,7 @@ char** grid;
 int main() {
 
 	char** gridRead = readGrid("readme.txt");
-	char** tempgrid = searchAlgorithm::getIntelligentPath(gridRead, x, y);
+	char** tempgrid = searchAlgorithm::getIntelligentPath(gridRead, 5,4);
 	if (tempgrid == nullptr) { std::cout << "No solutions\n"; }
 	else printGrid(5, 4, tempgrid); //i only put 5/4 for debugging purpose (need to make a grid class that stores member variables for this etc
 
