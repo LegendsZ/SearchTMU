@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "c9b573e7-f97e-49ff-b21b-84f3aa067a64": {
+      "ProjectGuid": "c9b573e7-f97e-49ff-b21b-84f3aa067a64",
+      "DisplayName": "TestCaseGenerator",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}

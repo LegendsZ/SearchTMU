@@ -4,18 +4,27 @@
 
 char** generateMaze(const unsigned int& x, const unsigned int& y, const unsigned int& debrisChance);
 void printGrid(const int& x, const int& y, char** grid);
-
+char** readGrid(std::string fname);
 
 void menu();
 void settings();
 
 
-const unsigned int x = 1000;
-const unsigned int y = 1000;
-const unsigned int debrisChance = 0;
+const unsigned int x = 50;
+const unsigned int y = 15;
+const unsigned int debrisChance = 10;
 char** grid;
 
 int main() {
+
+	char** gridRead = readGrid("readme.txt");
+	char** tempgrid = searchAlgorithm::getIntelligentPath(gridRead, x, y);
+	if (tempgrid == nullptr) { std::cout << "No solutions\n"; }
+	else printGrid(5, 4, tempgrid); //i only put 5/4 for debugging purpose (need to make a grid class that stores member variables for this etc
+
+	system("pause");
+	system("cls");
+
 	system("title Projekt SearchTMU");
 	//initialization
 	//time_t x = time(0);
@@ -137,6 +146,26 @@ void settings() {
 	}
 }
 
+char** readGrid(std::string fname) {
+	std::vector<std::string> lines;
+	std::fstream myfile;
+	myfile.open(fname, std::ios::in);
+	if (myfile.is_open()) {
+		std::string line;
+		while (getline(myfile, line)) {
+			lines.push_back(line);
+		}
+		myfile.close();
+	}
+	char** grid = new char* [lines.size()];
+	for (int i = 0; i < lines.size(); i++) {
+		grid[i] = new char[lines[0].length()];
+		for (int j = 0; j < lines[0].length(); j++) {
+			grid[i][j] = lines[i][j];
+		}
+	}
+	return grid;
+}
 
 char** generateMaze(const unsigned int& x, const unsigned int& y, const unsigned int& debrisChance) {
 	char** grid = new char*[y];

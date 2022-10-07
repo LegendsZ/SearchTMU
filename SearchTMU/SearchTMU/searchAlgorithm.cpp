@@ -97,6 +97,9 @@ char** searchAlgorithm::getIntelligentPath(char** grid, const unsigned int& size
 
 char** searchAlgorithm::nextIntelligentDirection(char** grid, const int sizeX, const int sizeY, int pX, int pY, int dX, int dY)
 {
+	//system("cls");
+	//searchAlgorithm::DprintGrid(sizeX, sizeY, grid);
+
 	//Check if destination is found, if true then return adjusted grid with path
 	if (grid[pY - 1][pX] == 'D')
 	{
