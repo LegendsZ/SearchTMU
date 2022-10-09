@@ -120,284 +120,94 @@ char** searchAlgorithm::nextIntelligentDirection(char** grid, const int sizeX, c
 	}
 
 
-	int ystep = (dY < pY) ? -1 : 1;
-	int xstep = (dX < pX) ? 1 : -1;
+	int ystep = (dY > pY) ? 1 : -1;
+	int xstep = (dX > pX) ? 1 : -1;
 
 	//Check magnitude of distance in x and y coordinate
-	if (abs(dX - pX) > abs(dY - pY)) {
-		if (dX == pX)
-		{
-
-		}
-		if (dX < pX) {
-			if (grid[pY][pX - 1] == ' ')
-			{
-				grid[pY][pX - 1] = '.';
-				char** tempgrid = nextIntelligentDirection(grid, sizeX, sizeY, pX - 1, pY, dX, dY);
-				if (tempgrid == nullptr) { grid[pY][pX - 1] = ' '; }
-				else return tempgrid;
-			}
-			if (grid[pY + ystep][pX] == ' ') //still gotta change this line and below such that the grid is accessed by [y][x] instead of [x][y]
-			{
-				grid[pY - 1][pX] = '.';
-				char** tempgrid = nextIntelligentDirection(grid, sizeX, sizeY, pX, pY + ystep, dX, dY);
-				if (tempgrid == nullptr) { grid[pY + ystep][pX] = ' '; }
-				else return tempgrid;
-			}
-			if (grid[pY - ystep][pX] == ' ')
-			{
-				grid[pY + 1][pX] = '.';
-				char** tempgrid = nextIntelligentDirection(grid, sizeX, sizeY, pX, pY - ystep, dX, dY);
-				if (tempgrid == nullptr) { grid[pY - ystep][pX] = ' '; }
-				else return tempgrid;
-			}
-			
-			if (grid[pY][pX + 1] == ' ')
-			{
-				grid[pY][pX + 1] = '.';
-				char** tempgrid = nextIntelligentDirection(grid, sizeX, sizeY, pX + 1, pY, dX, dY);
-				if (tempgrid == nullptr) { grid[pY][pX + 1] = ' '; }
-				else return tempgrid;
-			}
-		}
-		else if (dX == pX)
-		{
-			if (grid[pY + ystep][pX] == ' ') //still gotta change this line and below such that the grid is accessed by [y][x] instead of [x][y]
-			{
-				grid[pY - 1][pX] = '.';
-				char** tempgrid = nextIntelligentDirection(grid, sizeX, sizeY, pX, pY + ystep, dX, dY);
-				if (tempgrid == nullptr) { grid[pY + ystep][pX] = ' '; }
-				else return tempgrid;
-			}
-			if (grid[pY - ystep][pX] == ' ')
-			{
-				grid[pY + 1][pX] = '.';
-				char** tempgrid = nextIntelligentDirection(grid, sizeX, sizeY, pX, pY - ystep, dX, dY);
-				if (tempgrid == nullptr) { grid[pY - ystep][pX] = ' '; }
-				else return tempgrid;
-			}
-			if (grid[pY][pX - 1] == ' ')
-			{
-				grid[pY][pX - 1] = '.';
-				char** tempgrid = nextIntelligentDirection(grid, sizeX, sizeY, pX - 1, pY, dX, dY);
-				if (tempgrid == nullptr) { grid[pY][pX - 1] = ' '; }
-				else return tempgrid;
-			}
-		}
-		else {
-			if (grid[pY][pX + 1] == ' ')
-			{
-				grid[pY][pX + 1] = '.';
-				char** tempgrid = nextIntelligentDirection(grid, sizeX, sizeY, pX + 1, pY, dX, dY);
-				if (tempgrid == nullptr) { grid[pY][pX + 1] = ' '; }
-				else return tempgrid;
-			}
-
-			if (dY < pY) {
-				if (grid[pY - 1][pX] == ' ') //still gotta change this line and below such that the grid is accessed by [y][x] instead of [x][y]
-				{
-					grid[pY - 1][pX] = '.';
-					char** tempgrid = nextIntelligentDirection(grid, sizeX, sizeY, pX, pY - 1, dX, dY);
-					if (tempgrid == nullptr) { grid[pY - 1][pX] = ' '; }
-					else return tempgrid;
-				}
-				if (grid[pY + 1][pX] == ' ')
-				{
-					grid[pY + 1][pX] = '.';
-					char** tempgrid = nextIntelligentDirection(grid, sizeX, sizeY, pX, pY + 1, dX, dY);
-					if (tempgrid == nullptr) { grid[pY + 1][pX] = ' '; }
-					else return tempgrid;
-				}
-			}
-			else {
-				if (grid[pY + 1][pX] == ' ')
-				{
-					grid[pY + 1][pX] = '.';
-					char** tempgrid = nextIntelligentDirection(grid, sizeX, sizeY, pX, pY + 1, dX, dY);
-					if (tempgrid == nullptr) { grid[pY + 1][pX] = ' '; }
-					else return tempgrid;
-				}
-				if (grid[pY - 1][pX] == ' ') //still gotta change this line and below such that the grid is accessed by [y][x] instead of [x][y]
-				{
-					grid[pY - 1][pX] = '.';
-					char** tempgrid = nextIntelligentDirection(grid, sizeX, sizeY, pX, pY - 1, dX, dY);
-					if (tempgrid == nullptr) { grid[pY - 1][pX] = ' '; }
-					else return tempgrid;
-				}
-			}
-			if (grid[pY][pX - 1] == ' ')
-			{
-				grid[pY][pX - 1] = '.';
-				char** tempgrid = nextIntelligentDirection(grid, sizeX, sizeY, pX - 1, pY, dX, dY);
-				if (tempgrid == nullptr) { grid[pY][pX - 1] = ' '; }
-				else return tempgrid;
-			}
-		}
-	}else {
-		
-
-
-
-
-
-
-
-
-
-	if (dY < pY) {
-
-		if (dY < pY) {
-			if (grid[pY - 1][pX] == ' ') //still gotta change this line and below such that the grid is accessed by [y][x] instead of [x][y]
-			{
-				grid[pY - 1][pX] = '.';
-				char** tempgrid = nextIntelligentDirection(grid, sizeX, sizeY, pX, pY - 1, dX, dY);
-				if (tempgrid == nullptr) { grid[pY - 1][pX] = ' '; }
-				else return tempgrid;
-			}
-			if (grid[pY + 1][pX] == ' ')
-			{
-				grid[pY + 1][pX] = '.';
-				char** tempgrid = nextIntelligentDirection(grid, sizeX, sizeY, pX, pY + 1, dX, dY);
-				if (tempgrid == nullptr) { grid[pY + 1][pX] = ' '; }
-				else return tempgrid;
-			}
-		}
-		else {
-			if (grid[pY + 1][pX] == ' ')
-			{
-				grid[pY + 1][pX] = '.';
-				char** tempgrid = nextIntelligentDirection(grid, sizeX, sizeY, pX, pY + 1, dX, dY);
-				if (tempgrid == nullptr) { grid[pY + 1][pX] = ' '; }
-				else return tempgrid;
-			}
-			if (grid[pY - 1][pX] == ' ') //still gotta change this line and below such that the grid is accessed by [y][x] instead of [x][y]
-			{
-				grid[pY - 1][pX] = '.';
-				char** tempgrid = nextIntelligentDirection(grid, sizeX, sizeY, pX, pY - 1, dX, dY);
-				if (tempgrid == nullptr) { grid[pY - 1][pX] = ' '; }
-				else return tempgrid;
-			}
-		}
-
-		if (grid[pY][pX - 1] == ' ')
-		{
-			grid[pY][pX - 1] = '.';
-			char** tempgrid = nextIntelligentDirection(grid, sizeX, sizeY, pX - 1, pY, dX, dY);
-			if (tempgrid == nullptr) { grid[pY][pX - 1] = ' '; }
-			else return tempgrid;
-		}
-		
-		if (grid[pY][pX + 1] == ' ')
-		{
-			grid[pY][pX + 1] = '.';
-			char** tempgrid = nextIntelligentDirection(grid, sizeX, sizeY, pX + 1, pY, dX, dY);
-			if (tempgrid == nullptr) { grid[pY][pX + 1] = ' '; }
-			else return tempgrid;
-		}
-	}
-	else if (dY == pY)
+	if (abs(dX - pX) > abs(dY - pY)) 
 	{
-		if (dY < pY) {
-			if (grid[pY - 1][pX] == ' ') //still gotta change this line and below such that the grid is accessed by [y][x] instead of [x][y]
-			{
-				grid[pY - 1][pX] = '.';
-				char** tempgrid = nextIntelligentDirection(grid, sizeX, sizeY, pX, pY - 1, dX, dY);
-				if (tempgrid == nullptr) { grid[pY - 1][pX] = ' '; }
-				else return tempgrid;
-			}
-			if (grid[pY + 1][pX] == ' ')
-			{
-				grid[pY + 1][pX] = '.';
-				char** tempgrid = nextIntelligentDirection(grid, sizeX, sizeY, pX, pY + 1, dX, dY);
-				if (tempgrid == nullptr) { grid[pY + 1][pX] = ' '; }
-				else return tempgrid;
-			}
-		}
-		else {
-			if (grid[pY + 1][pX] == ' ')
-			{
-				grid[pY + 1][pX] = '.';
-				char** tempgrid = nextIntelligentDirection(grid, sizeX, sizeY, pX, pY + 1, dX, dY);
-				if (tempgrid == nullptr) { grid[pY + 1][pX] = ' '; }
-				else return tempgrid;
-			}
-			if (grid[pY - 1][pX] == ' ') //still gotta change this line and below such that the grid is accessed by [y][x] instead of [x][y]
-			{
-				grid[pY - 1][pX] = '.';
-				char** tempgrid = nextIntelligentDirection(grid, sizeX, sizeY, pX, pY - 1, dX, dY);
-				if (tempgrid == nullptr) { grid[pY - 1][pX] = ' '; }
-				else return tempgrid;
-			}
-		}
-		if (grid[pY][pX - 1] == ' ')
+		if (grid[pY][pX + xstep] == ' ')
 		{
-			grid[pY][pX - 1] = '.';
-			char** tempgrid = nextIntelligentDirection(grid, sizeX, sizeY, pX - 1, pY, dX, dY);
-			if (tempgrid == nullptr) { grid[pY][pX - 1] = ' '; }
+			grid[pY][pX + xstep] = '.';
+			char** tempgrid = nextIntelligentDirection(grid, sizeX, sizeY, pX + xstep, pY, dX, dY);
+			if (tempgrid == nullptr) { grid[pY][pX + xstep] = ' '; }
 			else return tempgrid;
 		}
-	}
-	else {
-
-		if (dY < pY) {
-			if (grid[pY - 1][pX] == ' ') //still gotta change this line and below such that the grid is accessed by [y][x] instead of [x][y]
-			{
-				grid[pY - 1][pX] = '.';
-				char** tempgrid = nextIntelligentDirection(grid, sizeX, sizeY, pX, pY - 1, dX, dY);
-				if (tempgrid == nullptr) { grid[pY - 1][pX] = ' '; }
-				else return tempgrid;
-			}
-			if (grid[pY + 1][pX] == ' ')
-			{
-				grid[pY + 1][pX] = '.';
-				char** tempgrid = nextIntelligentDirection(grid, sizeX, sizeY, pX, pY + 1, dX, dY);
-				if (tempgrid == nullptr) { grid[pY + 1][pX] = ' '; }
-				else return tempgrid;
-			}
-		}
-		else {
-			if (grid[pY + 1][pX] == ' ')
-			{
-				grid[pY + 1][pX] = '.';
-				char** tempgrid = nextIntelligentDirection(grid, sizeX, sizeY, pX, pY + 1, dX, dY);
-				if (tempgrid == nullptr) { grid[pY + 1][pX] = ' '; }
-				else return tempgrid;
-			}
-			if (grid[pY - 1][pX] == ' ') //still gotta change this line and below such that the grid is accessed by [y][x] instead of [x][y]
-			{
-				grid[pY - 1][pX] = '.';
-				char** tempgrid = nextIntelligentDirection(grid, sizeX, sizeY, pX, pY - 1, dX, dY);
-				if (tempgrid == nullptr) { grid[pY - 1][pX] = ' '; }
-				else return tempgrid;
-			}
-		}
-
-		if (grid[pY][pX + 1] == ' ')
+		if (grid[pY + ystep][pX] == ' ') //still gotta change this line and below such that the grid is accessed by [y][x] instead of [x][y]
 		{
-			grid[pY][pX + 1] = '.';
-			char** tempgrid = nextIntelligentDirection(grid, sizeX, sizeY, pX + 1, pY, dX, dY);
-			if (tempgrid == nullptr) { grid[pY][pX + 1] = ' '; }
+			grid[pY + ystep][pX] = '.';
+			char** tempgrid = nextIntelligentDirection(grid, sizeX, sizeY, pX, pY + ystep, dX, dY);
+			if (tempgrid == nullptr) { grid[pY + ystep][pX] = ' '; }
+			else return tempgrid;
+		}
+		if (grid[pY - ystep][pX] == ' ')
+		{
+			grid[pY - ystep][pX] = '.';
+			char** tempgrid = nextIntelligentDirection(grid, sizeX, sizeY, pX, pY - ystep, dX, dY);
+			if (tempgrid == nullptr) { grid[pY - ystep][pX] = ' '; }
+			else return tempgrid;
+		}
+		if (grid[pY][pX - xstep] == ' ')
+		{
+			grid[pY][pX - xstep] = '.';
+			char** tempgrid = nextIntelligentDirection(grid, sizeX, sizeY, pX - xstep, pY, dX, dY);
+			if (tempgrid == nullptr) { grid[pY][pX - xstep] = ' '; }
 			else return tempgrid;
 		}
 		
-		if (grid[pY][pX - 1] == ' ')
+
+	}
+	else if (dX == pX)
+	{
+		if (grid[pY + ystep][pX] == ' ') //still gotta change this line and below such that the grid is accessed by [y][x] instead of [x][y]
 		{
-			grid[pY][pX - 1] = '.';
-			char** tempgrid = nextIntelligentDirection(grid, sizeX, sizeY, pX - 1, pY, dX, dY);
-			if (tempgrid == nullptr) { grid[pY][pX - 1] = ' '; }
+			grid[pY + ystep][pX] = '.';
+			char** tempgrid = nextIntelligentDirection(grid, sizeX, sizeY, pX, pY + ystep, dX, dY);
+			if (tempgrid == nullptr) { grid[pY + ystep][pX] = ' '; }
+			else return tempgrid;
+		}
+		if (grid[pY - ystep][pX] == ' ')
+		{
+			grid[pY - ystep][pX] = '.';
+			char** tempgrid = nextIntelligentDirection(grid, sizeX, sizeY, pX, pY - ystep, dX, dY);
+			if (tempgrid == nullptr) { grid[pY - ystep][pX] = ' '; }
 			else return tempgrid;
 		}
 	}
-
-
-
-
-
-
-
-
+	else
+	{
+		if (grid[pY + ystep][pX] == ' ') //still gotta change this line and below such that the grid is accessed by [y][x] instead of [x][y]
+		{
+			grid[pY + ystep][pX] = '.';
+			char** tempgrid = nextIntelligentDirection(grid, sizeX, sizeY, pX, pY + ystep, dX, dY);
+			if (tempgrid == nullptr) { grid[pY + ystep][pX] = ' '; }
+			else return tempgrid;
+		}
+		if (grid[pY][pX + xstep] == ' ')
+		{
+			grid[pY][pX + xstep] = '.';
+			char** tempgrid = nextIntelligentDirection(grid, sizeX, sizeY, pX + xstep, pY, dX, dY);
+			if (tempgrid == nullptr) { grid[pY][pX + xstep] = ' '; }
+			else return tempgrid;
+		}
+		if (grid[pY][pX - xstep] == ' ')
+		{
+			grid[pY][pX - xstep] = '.';
+			char** tempgrid = nextIntelligentDirection(grid, sizeX, sizeY, pX - xstep, pY, dX, dY);
+			if (tempgrid == nullptr) { grid[pY][pX - xstep] = ' '; }
+			else return tempgrid;
+		}
+		if (grid[pY - ystep][pX] == ' ')
+		{
+			grid[pY - ystep][pX] = '.';
+			char** tempgrid = nextIntelligentDirection(grid, sizeX, sizeY, pX, pY - ystep, dX, dY);
+			if (tempgrid == nullptr) { grid[pY - ystep][pX] = ' '; }
+			else return tempgrid;
+		}
+		
 
 	}
+
 
 
 
