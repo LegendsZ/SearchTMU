@@ -7,6 +7,9 @@ char** searchAlgorithm::getPath(char** grid, unsigned int& x, unsigned int& y)
 	searchAlgorithm::myPath.addCoordinate(new coordinate(x, y));
 	return nextDirection(grid, x, y);
 }
+
+
+
 ///APPROACH 1: Brute Force 
 char** searchAlgorithm::nextDirection(char** grid, int x, int y)
 {
@@ -91,9 +94,70 @@ char** searchAlgorithm::getIntelligentPath(char** grid, const unsigned int& size
 	if (pX * pY * dX * dY < 0) {//smth went wrong
 		return nullptr;
 	}
+	int upperY = (pY > dY) ? pY + 1 : dY + 1;
+	int lowerY = (pY > dY) ? dY - 1 : pY - 1;
+	int upperX = (pX > dX) ? pX + 1 : dX + 1;
+	int lowerX = (pX > dX) ? dX - 1 : pX - 1;
+	int limit = (sizeX > sizeY) ? sizeX : sizeY;
+	for (int i = 0; i < limit; i++)
+	{
+		char** tempgrid = nextIntelligentDirection(mapLimiter(grid, upperY + i, lowerY - i, upperX + i, lowerX - i, sizeY, sizeX, LIMIT), sizeX, sizeY, pX, pY, dX, dY);
+		mapLimiter(grid, upperY + i, lowerY - i, upperX + i, lowerX - i, sizeY, sizeX, RELEASE);
 
-	return nextIntelligentDirection(grid,sizeX,sizeY,pX,pY,dX,dY);
+		if (tempgrid != nullptr) return tempgrid;
+
+	}
+	return nullptr;
 }
+
+
+char** searchAlgorithm::mapLimiter(char** grid, int upperY, int lowerY, int upperX, int lowerX, int sizeY, int sizeX, int state)
+{
+	char original = (state == LIMIT) ? ' ' : '!';
+	char replacement = (state == LIMIT) ? '!' : ' ';
+	if (upperY < sizeY)
+	{
+		for (int i = 0; i < sizeX; i++)
+		{
+			if (grid[upperY][i] == original)
+			{
+				grid[upperY][i] = replacement;
+			}
+		}
+	}
+	if (lowerY > 0)
+	{
+		for (int i = 0; i < sizeX; i++)
+		{
+			if (grid[lowerY][i] == original)
+			{
+				grid[lowerY][i] = replacement;
+			}
+		}
+	}
+	if (upperX < sizeX)
+	{
+		for (int i = 0; i < sizeY; i++)
+		{
+			if (grid[i][upperX] == original)
+			{
+				grid[i][upperX] = replacement;
+			}
+		}
+	}
+	if (lowerX > 0)
+	{
+		for (int i = 0; i < sizeY; i++)
+		{
+			if (grid[i][lowerX] == original)
+			{
+				grid[i][lowerX] = replacement;
+			}
+		}
+	}
+	return grid;
+}
+
 
 char** searchAlgorithm::nextIntelligentDirection(char** grid, const int sizeX, const int sizeY, int pX, int pY, int dX, int dY)
 {

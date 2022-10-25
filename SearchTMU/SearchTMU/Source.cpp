@@ -1,5 +1,6 @@
 #include "searchAlgorithm.h"
 #include "schedule.h"
+#include "Image.h"
 #pragma once
 
 char** generateMaze(const unsigned int& x, const unsigned int& y, const unsigned int& debrisChance);
@@ -10,8 +11,8 @@ void menu();
 void settings();
 
 
-const unsigned int x = 50;
-const unsigned int y = 15;
+const unsigned int x = 100;
+const unsigned int y = 100;
 const unsigned int debrisChance = 10;
 char** grid;
 
@@ -103,7 +104,21 @@ void menu() {
 			//printGrid(x, y, searchAlgorithm::getPath(grid, pX, pY));
 			char** tempgrid = searchAlgorithm::getIntelligentPath(grid, x, y);
 			if (tempgrid == nullptr) { std::cout << "No solutions\n"; }
-			else printGrid(x, y, tempgrid);
+			else
+			{
+				//printGrid(x, y, tempgrid);
+				Image image(x, y);
+				for (int i = 0; i < y; i++)
+				{
+					for (int j = 0; j < x; j++)
+					{
+						
+						image.setColor(Color((float)tempgrid[i][j], (float)tempgrid[i][j], (float)tempgrid[i][j]), i, j);
+					}
+				}
+				image.Export("image.bmp");
+				printGrid(x, y, tempgrid);
+			}
 			//printGrid(x, y, searchAlgorithm::getIntelligentPath(grid, x, y);
 			system("pause");
 		}
