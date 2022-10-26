@@ -259,4 +259,3 @@ char** searchAlgorithm::nextIntelligentDirection(char** grid, const int sizeX, c
 	return nullptr;
 }
 
-
