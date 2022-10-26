@@ -145,6 +145,7 @@
     <ClCompile Include="schedule.cpp" />
     <ClCompile Include="searchAlgorithm.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="coordinate.h" />
@@ -152,6 +153,7 @@
     <ClInclude Include="path.h" />
     <ClInclude Include="schedule.h" />
     <ClInclude Include="searchAlgorithm.h" />
+    <ClInclude Include="Timer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

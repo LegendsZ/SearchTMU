@@ -1,6 +1,7 @@
 #include "searchAlgorithm.h"
 #include "schedule.h"
 #include "Image.h"
+#include "Timer.h"
 #pragma once
 
 char** generateMaze(const unsigned int& x, const unsigned int& y, const unsigned int& debrisChance);
@@ -11,8 +12,8 @@ void menu();
 void settings();
 
 
-const unsigned int x = 100;
-const unsigned int y = 100;
+const unsigned int x = 1000;
+const unsigned int y = 1000;
 const unsigned int debrisChance = 10;
 char** grid;
 
@@ -32,7 +33,6 @@ int main() {
 	//std::cout << "\nSeed: " << x << "\n\n";
 	srand(time(0));
 	grid = nullptr;
-	grid = generateMaze(x, y, debrisChance);
 	std::cout << "\
       ___  ___  ____     ________ ________         \n\
      / _ \\/ _ \\/ __ \\__ / / __/ //_/_  __/         \n\
@@ -88,7 +88,7 @@ void menu() {
 		else if (input == "generate") {
 
 			grid = generateMaze(x, y, debrisChance);
-			printGrid(x, y, grid);
+			//printGrid(x, y, grid);
 			std::cout << "\n\n";
 
 			unsigned int pX = 0;
@@ -102,7 +102,25 @@ void menu() {
 				}
 			}
 			//printGrid(x, y, searchAlgorithm::getPath(grid, pX, pY));
-			char** tempgrid = searchAlgorithm::getIntelligentPath(grid, x, y);
+
+			//BELOW STARTS SOMETHING TO BE DELETED
+			char** tgridLOOP = nullptr;
+			Timer* searchAlgoTimerLOOP = new Timer();
+			unsigned int counter = 0;
+			while (tgridLOOP == nullptr) {
+				searchAlgoTimerLOOP->start();
+				tgridLOOP = searchAlgorithm::getIntelligentPath(grid, x, y);
+				searchAlgoTimerLOOP->stop();
+				counter++;
+			}
+			char** tempgrid = tgridLOOP;
+			//ABOVE IS SOMETHING TO BE DELETED
+
+			//Timer* searchAlgoTimer = new Timer();
+			//searchAlgoTimer->start();
+			//char** tempgrid = searchAlgorithm::getIntelligentPath(grid, x, y);
+			//searchAlgoTimer->stop();
+			
 			if (tempgrid == nullptr) { std::cout << "No solutions\n"; }
 			else
 			{
@@ -117,9 +135,14 @@ void menu() {
 					}
 				}
 				image.Export("image.bmp");
-				printGrid(x, y, tempgrid);
+				//printGrid(x, y, tempgrid);
 			}
 			//printGrid(x, y, searchAlgorithm::getIntelligentPath(grid, x, y);
+
+			std::cout << "Grid Size: " << x << " x " << y << "\nAmount of attempts: " << counter<<"\n";
+			//searchAlgoTimer->print();
+			searchAlgoTimerLOOP->print();
+
 			system("pause");
 		}
 		else {
