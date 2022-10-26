@@ -12,8 +12,8 @@ void menu();
 void settings();
 
 
-const unsigned int x = 1000;
-const unsigned int y = 1000;
+const unsigned int x = 100;
+const unsigned int y = 100;
 const unsigned int debrisChance = 10;
 char** grid;
 
@@ -124,14 +124,14 @@ void menu() {
 			if (tempgrid == nullptr) { std::cout << "No solutions\n"; }
 			else
 			{
-				//printGrid(x, y, tempgrid);
+				printGrid(x, y, tempgrid);
 				Image image(x, y);
 				for (int i = 0; i < y; i++)
 				{
 					for (int j = 0; j < x; j++)
 					{
 						
-						image.setColor(Color((float)tempgrid[i][j], (float)tempgrid[i][j], (float)tempgrid[i][j]), i, j);
+						image.setColor(Color((float)tempgrid[i][j], (float)tempgrid[i][j], (float)tempgrid[i][j]), j, y - i - 1);
 					}
 				}
 				image.Export("image.bmp");
