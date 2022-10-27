@@ -1,0 +1,2 @@
+C:\Users\WINDOWS\Documents\GitHub\SearchTMU\SearchTMUGUI\SearchTMUGUI\x64\Debug\SearchTMUGUI.vcxproj.AssemblyReference.cache
+C:\Users\WINDOWS\Documents\GitHub\SearchTMU\SearchTMUGUI\SearchTMUGUI\x64\Debug\SearchTMUGUI.vcxproj.SuggestedBindingRedirects.cache
