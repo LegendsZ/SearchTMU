@@ -34,6 +34,12 @@ namespace SearchTMUGUI {
 				delete components;
 			}
 		}
+	private: System::Windows::Forms::Label^ lblTitle;
+	private: System::Windows::Forms::Label^ lblInfo;
+	protected:
+
+
+	protected:
 
 	private:
 		/// <summary>
@@ -48,11 +54,46 @@ namespace SearchTMUGUI {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			this->components = gcnew System::ComponentModel::Container();
-			this->Size = System::Drawing::Size(300,300);
-			this->Text = L"Gui";
-			this->Padding = System::Windows::Forms::Padding(0);
+			this->lblTitle = (gcnew System::Windows::Forms::Label());
+			this->lblInfo = (gcnew System::Windows::Forms::Label());
+			this->SuspendLayout();
+			// 
+			// lblTitle
+			// 
+			this->lblTitle->AutoSize = true;
+			this->lblTitle->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 30, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->lblTitle->ForeColor = System::Drawing::Color::Black;
+			this->lblTitle->Location = System::Drawing::Point(273, 59);
+			this->lblTitle->Name = L"lblTitle";
+			this->lblTitle->Size = System::Drawing::Size(591, 113);
+			this->lblTitle->TabIndex = 0;
+			this->lblTitle->Text = L"SearchTMU";
+			// 
+			// lblInfo
+			// 
+			this->lblInfo->AutoSize = true;
+			this->lblInfo->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 20.1F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->lblInfo->ForeColor = System::Drawing::Color::Black;
+			this->lblInfo->Location = System::Drawing::Point(171, 269);
+			this->lblInfo->Name = L"lblInfo";
+			this->lblInfo->Size = System::Drawing::Size(760, 76);
+			this->lblInfo->TabIndex = 1;
+			this->lblInfo->Text = L"Click anywhere to begin";
+			// 
+			// Gui
+			// 
+			this->AutoScaleDimensions = System::Drawing::SizeF(16, 31);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->ClientSize = System::Drawing::Size(1124, 439);
+			this->Controls->Add(this->lblInfo);
+			this->Controls->Add(this->lblTitle);
+			this->Name = L"Gui";
+			this->Text = L"Gui";
+			this->ResumeLayout(false);
+			this->PerformLayout();
+
 		}
 #pragma endregion
 	};
