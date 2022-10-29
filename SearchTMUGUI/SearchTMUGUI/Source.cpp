@@ -1,9 +1,9 @@
-#include "Gui.h"
+#include "guiLoading.h"
 
 int main() {
 	System::Windows::Forms::Application::EnableVisualStyles();
 	System::Windows::Forms::Application::SetCompatibleTextRenderingDefault(false);
-	SearchTMUGUI::Gui gui;
-	System::Windows::Forms::Application::Run(% gui);
+	SearchTMUGUI::guiMain guiMain;
+	System::Windows::Forms::Application::Run(% guiMain);
 	return 0;
 }

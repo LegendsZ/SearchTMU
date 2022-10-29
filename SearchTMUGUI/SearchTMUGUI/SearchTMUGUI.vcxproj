@@ -115,24 +115,36 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Gui.cpp" />
+    <ClCompile Include="guiLoading.cpp" />
+    <ClCompile Include="guiMain.cpp" />
+    <ClCompile Include="searchAlgorithm.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="TimerCustom.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Gui.h">
+    <ClInclude Include="guiLoading.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="guiMain.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="searchAlgorithm.h" />
+    <ClInclude Include="TimerCustom.h" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Gui.resx">
-      <DependentUpon>Gui.h</DependentUpon>
+    <EmbeddedResource Include="guiLoading.resx">
+      <DependentUpon>guiLoading.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="guiMain.resx">
+      <DependentUpon>guiMain.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

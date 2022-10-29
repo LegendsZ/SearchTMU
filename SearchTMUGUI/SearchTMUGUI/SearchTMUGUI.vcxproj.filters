@@ -13,18 +13,42 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Supporting">
+      <UniqueIdentifier>{90254a4e-5276-465c-b28a-265ede6e7a42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Supporting">
+      <UniqueIdentifier>{f0d55f54-f137-43bf-84c8-beea8d40f25f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Gui.cpp">
+    <ClCompile Include="guiLoading.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="guiMain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="searchAlgorithm.cpp">
+      <Filter>Source Files\Supporting</Filter>
+    </ClCompile>
+    <ClCompile Include="TimerCustom.cpp">
+      <Filter>Source Files\Supporting</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Gui.h">
+    <ClInclude Include="guiLoading.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="guiMain.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="searchAlgorithm.h">
+      <Filter>Header Files\Supporting</Filter>
+    </ClInclude>
+    <ClInclude Include="TimerCustom.h">
+      <Filter>Header Files\Supporting</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

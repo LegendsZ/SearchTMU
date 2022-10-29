@@ -1,10 +1,10 @@
 #include "searchAlgorithm.h"
 
-path searchAlgorithm::myPath;
+//path searchAlgorithm::myPath;
 
 char** searchAlgorithm::getPath(char** grid, unsigned int& x, unsigned int& y)
 {
-	searchAlgorithm::myPath.addCoordinate(new coordinate(x, y));
+	//searchAlgorithm::myPath.addCoordinate(new coordinate(x, y));
 	return nextDirection(grid, x, y);
 }
 
