@@ -18,14 +18,64 @@ System::Void SearchTMUGUI::guiMain::guiMain_Shown(System::Object^ sender, System
 		Threading::Thread::Sleep(1);
 
 		lblTitle->Location = System::Drawing::Point(lblTitle->Location.X, lblTitle->Location.Y + 5);
-		btnGenerate->Location = System::Drawing::Point(btnGenerate->Location.X, btnGenerate->Location.Y - 7);
-		btnSchedule->Location = System::Drawing::Point(btnSchedule->Location.X, btnSchedule->Location.Y - 7);
-		btnSettings->Location = System::Drawing::Point(btnSettings->Location.X, btnSettings->Location.Y - 7);
+		btnGenerate->Location = System::Drawing::Point(btnGenerate->Location.X, btnGenerate->Location.Y - 10);
+		btnSchedule->Location = System::Drawing::Point(btnSchedule->Location.X, btnSchedule->Location.Y - 10);
+		btnSettings->Location = System::Drawing::Point(btnSettings->Location.X, btnSettings->Location.Y - 10);
 
 		lblTitle->Refresh();
 		btnGenerate->Refresh();
 		btnSchedule->Refresh();
 		btnSettings->Refresh();
+	}
+}
+
+System::Void SearchTMUGUI::guiMain::btnGenerate_Click(System::Object^ sender, System::EventArgs^ e)
+{
+	information::timer->start();
+	information::grid = generateMaze(information::x, information::y, information::debrisChance);
+	information::timer->stop();
+}
+
+System::Void SearchTMUGUI::guiMain::btnSettings_Click(System::Object^ sender, System::EventArgs^ e)
+{
+	while (lblTitle->Location.Y != -100) {
+		//Threading::Thread::Sleep(1);
+
+		lblTitle->Location = System::Drawing::Point(lblTitle->Location.X, lblTitle->Location.Y - 5);
+		btnGenerate->Location = System::Drawing::Point(btnGenerate->Location.X, btnGenerate->Location.Y + 10);
+		btnSchedule->Location = System::Drawing::Point(btnSchedule->Location.X, btnSchedule->Location.Y + 10);
+		btnSettings->Location = System::Drawing::Point(btnSettings->Location.X, btnSettings->Location.Y + 10);
+		
+
+		nUDX->Location = System::Drawing::Point(nUDX->Location.X - 9, nUDX->Location.Y);
+		lblX->Location = System::Drawing::Point(lblX->Location.X - 9, lblX->Location.Y);
+		nUDY->Location = System::Drawing::Point(nUDY->Location.X - 9, nUDY->Location.Y);
+		btnSet->Location = System::Drawing::Point(btnSet->Location.X - 9, btnSet->Location.Y);
+		btnBack->Location = System::Drawing::Point(btnBack->Location.X - 9, btnBack->Location.Y);
+
+		this->Refresh();
+	}
+	
+}
+
+System::Void SearchTMUGUI::guiMain::btnBack_Click(System::Object^ sender, System::EventArgs^ e)
+{
+	while (lblTitle->Location.Y != 25) {
+		//Threading::Thread::Sleep(1);
+
+		lblTitle->Location = System::Drawing::Point(lblTitle->Location.X, lblTitle->Location.Y + 5);
+		btnGenerate->Location = System::Drawing::Point(btnGenerate->Location.X, btnGenerate->Location.Y - 10);
+		btnSchedule->Location = System::Drawing::Point(btnSchedule->Location.X, btnSchedule->Location.Y - 10);
+		btnSettings->Location = System::Drawing::Point(btnSettings->Location.X, btnSettings->Location.Y - 10);
+
+
+		nUDX->Location = System::Drawing::Point(nUDX->Location.X + 9, nUDX->Location.Y);
+		lblX->Location = System::Drawing::Point(lblX->Location.X + 9, lblX->Location.Y);
+		nUDY->Location = System::Drawing::Point(nUDY->Location.X + 9, nUDY->Location.Y);
+		btnSet->Location = System::Drawing::Point(btnSet->Location.X + 9, btnSet->Location.Y);
+		btnBack->Location = System::Drawing::Point(btnBack->Location.X + 9, btnBack->Location.Y);
+
+		this->Refresh();
 	}
 }
 
