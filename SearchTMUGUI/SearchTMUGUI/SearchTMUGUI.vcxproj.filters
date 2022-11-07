@@ -24,9 +24,6 @@
     <ClCompile Include="Source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="guiLoading.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="guiMain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -38,9 +35,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="guiLoading.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="guiMain.h">
       <Filter>Header Files</Filter>
     </ClInclude>

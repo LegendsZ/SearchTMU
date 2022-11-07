@@ -59,6 +59,11 @@ namespace SearchTMUGUI {
 	private: System::Windows::Forms::NumericUpDown^ nUDY;
 	private: System::Windows::Forms::Label^ lblX;
 	private: System::Windows::Forms::Button^ btnBack;
+	private: System::Windows::Forms::PictureBox^ pbMain;
+
+
+
+
 
 	protected:
 
@@ -85,8 +90,10 @@ namespace SearchTMUGUI {
 			this->nUDY = (gcnew System::Windows::Forms::NumericUpDown());
 			this->lblX = (gcnew System::Windows::Forms::Label());
 			this->btnBack = (gcnew System::Windows::Forms::Button());
+			this->pbMain = (gcnew System::Windows::Forms::PictureBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->nUDX))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->nUDY))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pbMain))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// lblInfo
@@ -95,9 +102,10 @@ namespace SearchTMUGUI {
 			this->lblInfo->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 20.1F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->lblInfo->ForeColor = System::Drawing::Color::Black;
-			this->lblInfo->Location = System::Drawing::Point(579, 422);
+			this->lblInfo->Location = System::Drawing::Point(217, 155);
+			this->lblInfo->Margin = System::Windows::Forms::Padding(1, 0, 1, 0);
 			this->lblInfo->Name = L"lblInfo";
-			this->lblInfo->Size = System::Drawing::Size(335, 76);
+			this->lblInfo->Size = System::Drawing::Size(144, 31);
 			this->lblInfo->TabIndex = 5;
 			this->lblInfo->Text = L"Loading...";
 			// 
@@ -107,9 +115,10 @@ namespace SearchTMUGUI {
 			this->lblTitle->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 30, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->lblTitle->ForeColor = System::Drawing::Color::Black;
-			this->lblTitle->Location = System::Drawing::Point(472, -167);
+			this->lblTitle->Location = System::Drawing::Point(177, -70);
+			this->lblTitle->Margin = System::Windows::Forms::Padding(1, 0, 1, 0);
 			this->lblTitle->Name = L"lblTitle";
-			this->lblTitle->Size = System::Drawing::Size(591, 113);
+			this->lblTitle->Size = System::Drawing::Size(242, 46);
 			this->lblTitle->TabIndex = 4;
 			this->lblTitle->Text = L"SearchTMU";
 			// 
@@ -119,10 +128,9 @@ namespace SearchTMUGUI {
 			this->btnGenerate->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->btnGenerate->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->btnGenerate->Location = System::Drawing::Point(20, 1061);
-			this->btnGenerate->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
+			this->btnGenerate->Location = System::Drawing::Point(11, 445);
 			this->btnGenerate->Name = L"btnGenerate";
-			this->btnGenerate->Size = System::Drawing::Size(461, 155);
+			this->btnGenerate->Size = System::Drawing::Size(173, 65);
 			this->btnGenerate->TabIndex = 6;
 			this->btnGenerate->Text = L"Generate";
 			this->btnGenerate->UseVisualStyleBackColor = false;
@@ -134,10 +142,9 @@ namespace SearchTMUGUI {
 			this->btnSchedule->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->btnSchedule->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->btnSchedule->Location = System::Drawing::Point(540, 1061);
-			this->btnSchedule->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
+			this->btnSchedule->Location = System::Drawing::Point(205, 445);
 			this->btnSchedule->Name = L"btnSchedule";
-			this->btnSchedule->Size = System::Drawing::Size(461, 155);
+			this->btnSchedule->Size = System::Drawing::Size(173, 65);
 			this->btnSchedule->TabIndex = 7;
 			this->btnSchedule->Text = L"Schedule";
 			this->btnSchedule->UseVisualStyleBackColor = false;
@@ -148,10 +155,9 @@ namespace SearchTMUGUI {
 			this->btnSettings->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->btnSettings->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->btnSettings->Location = System::Drawing::Point(1060, 1061);
-			this->btnSettings->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
+			this->btnSettings->Location = System::Drawing::Point(401, 445);
 			this->btnSettings->Name = L"btnSettings";
-			this->btnSettings->Size = System::Drawing::Size(461, 155);
+			this->btnSettings->Size = System::Drawing::Size(173, 65);
 			this->btnSettings->TabIndex = 8;
 			this->btnSettings->Text = L"Settings";
 			this->btnSettings->UseVisualStyleBackColor = false;
@@ -163,28 +169,30 @@ namespace SearchTMUGUI {
 			this->btnSet->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->btnSet->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->btnSet->Location = System::Drawing::Point(1621, 219);
-			this->btnSet->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
+			this->btnSet->Location = System::Drawing::Point(608, 92);
 			this->btnSet->Name = L"btnSet";
-			this->btnSet->Size = System::Drawing::Size(417, 157);
+			this->btnSet->Size = System::Drawing::Size(156, 66);
 			this->btnSet->TabIndex = 9;
 			this->btnSet->Text = L"Set";
 			this->btnSet->UseVisualStyleBackColor = false;
+			this->btnSet->Click += gcnew System::EventHandler(this, &guiMain::btnSet_Click);
 			// 
 			// nUDX
 			// 
 			this->nUDX->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15));
-			this->nUDX->Location = System::Drawing::Point(1621, 130);
+			this->nUDX->Location = System::Drawing::Point(608, 55);
+			this->nUDX->Margin = System::Windows::Forms::Padding(1);
 			this->nUDX->Name = L"nUDX";
-			this->nUDX->Size = System::Drawing::Size(120, 64);
+			this->nUDX->Size = System::Drawing::Size(45, 30);
 			this->nUDX->TabIndex = 10;
 			// 
 			// nUDY
 			// 
 			this->nUDY->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15));
-			this->nUDY->Location = System::Drawing::Point(1918, 130);
+			this->nUDY->Location = System::Drawing::Point(719, 55);
+			this->nUDY->Margin = System::Windows::Forms::Padding(1);
 			this->nUDY->Name = L"nUDY";
-			this->nUDY->Size = System::Drawing::Size(120, 64);
+			this->nUDY->Size = System::Drawing::Size(45, 30);
 			this->nUDY->TabIndex = 11;
 			// 
 			// lblX
@@ -193,9 +201,10 @@ namespace SearchTMUGUI {
 			this->lblX->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 20.1F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->lblX->ForeColor = System::Drawing::Color::Black;
-			this->lblX->Location = System::Drawing::Point(1796, 127);
+			this->lblX->Location = System::Drawing::Point(674, 53);
+			this->lblX->Margin = System::Windows::Forms::Padding(1, 0, 1, 0);
 			this->lblX->Name = L"lblX";
-			this->lblX->Size = System::Drawing::Size(78, 76);
+			this->lblX->Size = System::Drawing::Size(33, 31);
 			this->lblX->TabIndex = 12;
 			this->lblX->Text = L"X";
 			// 
@@ -205,21 +214,30 @@ namespace SearchTMUGUI {
 			this->btnBack->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->btnBack->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->btnBack->Location = System::Drawing::Point(1621, 535);
-			this->btnBack->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
+			this->btnBack->Location = System::Drawing::Point(608, 224);
 			this->btnBack->Name = L"btnBack";
-			this->btnBack->Size = System::Drawing::Size(417, 157);
+			this->btnBack->Size = System::Drawing::Size(156, 66);
 			this->btnBack->TabIndex = 13;
 			this->btnBack->Text = L"Back";
 			this->btnBack->UseVisualStyleBackColor = false;
 			this->btnBack->Click += gcnew System::EventHandler(this, &guiMain::btnBack_Click);
 			// 
+			// pbMain
+			// 
+			this->pbMain->BackColor = System::Drawing::Color::Red;
+			this->pbMain->Location = System::Drawing::Point(300, 200);
+			this->pbMain->Name = L"pbMain";
+			this->pbMain->Size = System::Drawing::Size(0, 0);
+			this->pbMain->TabIndex = 14;
+			this->pbMain->TabStop = false;
+			// 
 			// guiMain
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(16, 31);
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::White;
-			this->ClientSize = System::Drawing::Size(1565, 1016);
+			this->ClientSize = System::Drawing::Size(584, 361);
+			this->Controls->Add(this->pbMain);
 			this->Controls->Add(this->btnBack);
 			this->Controls->Add(this->lblX);
 			this->Controls->Add(this->nUDY);
@@ -231,7 +249,6 @@ namespace SearchTMUGUI {
 			this->Controls->Add(this->lblInfo);
 			this->Controls->Add(this->lblTitle);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
-			this->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
 			this->MaximizeBox = false;
 			this->Name = L"guiMain";
 			this->ShowIcon = false;
@@ -240,6 +257,7 @@ namespace SearchTMUGUI {
 			this->Shown += gcnew System::EventHandler(this, &guiMain::guiMain_Shown);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->nUDX))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->nUDY))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pbMain))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -250,5 +268,6 @@ namespace SearchTMUGUI {
 		System::Void btnGenerate_Click(System::Object^ sender, System::EventArgs^ e);
 		System::Void btnSettings_Click(System::Object^ sender, System::EventArgs^ e);
 		System::Void btnBack_Click(System::Object^ sender, System::EventArgs^ e);
+		System::Void btnSet_Click(System::Object^ sender, System::EventArgs^ e);
 };
 }

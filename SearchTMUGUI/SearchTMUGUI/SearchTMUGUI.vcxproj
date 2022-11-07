@@ -115,7 +115,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="guiLoading.cpp" />
     <ClCompile Include="guiMain.cpp" />
     <ClCompile Include="searchAlgorithm.cpp" />
     <ClCompile Include="Source.cpp" />
@@ -130,9 +129,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="guiLoading.h">
-      <FileType>CppForm</FileType>
-    </ClInclude>
     <ClInclude Include="guiMain.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -140,9 +136,6 @@
     <ClInclude Include="TimerCustom.h" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="guiLoading.resx">
-      <DependentUpon>guiLoading.h</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="guiMain.resx">
       <DependentUpon>guiMain.h</DependentUpon>
     </EmbeddedResource>

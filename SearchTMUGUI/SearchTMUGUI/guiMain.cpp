@@ -8,6 +8,8 @@ TimerCustom* information::timer = nullptr;
 
 System::Void SearchTMUGUI::guiMain::guiMain_Shown(System::Object^ sender, System::EventArgs^ e)
 {
+	nUDX->Text = information::x.ToString();
+	nUDY->Text = information::y.ToString();
 
 	//load below
 	srand(time(0));
@@ -34,6 +36,11 @@ System::Void SearchTMUGUI::guiMain::btnGenerate_Click(System::Object^ sender, Sy
 	information::timer->start();
 	information::grid = generateMaze(information::x, information::y, information::debrisChance);
 	information::timer->stop();
+	while (pbMain->Size.Width != this->Width) {
+		pbMain->Size = System::Drawing::Size(pbMain->Size.Width + 2, pbMain->Size.Height + 2);
+		pbMain->Location = System::Drawing::Point(pbMain->Location.X - 1, pbMain->Location.Y - 1);
+		pbMain->Refresh();
+	}
 }
 
 System::Void SearchTMUGUI::guiMain::btnSettings_Click(System::Object^ sender, System::EventArgs^ e)
@@ -77,6 +84,12 @@ System::Void SearchTMUGUI::guiMain::btnBack_Click(System::Object^ sender, System
 
 		this->Refresh();
 	}
+}
+
+System::Void SearchTMUGUI::guiMain::btnSet_Click(System::Object^ sender, System::EventArgs^ e)
+{
+	information::x = int::Parse(nUDX->Text);
+	information::y = int::Parse(nUDY->Text);
 }
 
 char** SearchTMUGUI::guiMain::generateMaze(const unsigned int& x, const unsigned int& y, const unsigned int& debrisChance)

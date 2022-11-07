@@ -1,4 +1,4 @@
-#include "guiLoading.h"
+#include "guiMain.h"
 
 int main() {
 	System::Windows::Forms::Application::EnableVisualStyles();

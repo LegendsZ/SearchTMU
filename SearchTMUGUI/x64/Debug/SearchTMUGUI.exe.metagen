@@ -1,4 +1,3 @@
-  SearchTMUGUI.guiLoading.resources - Embedded, ContainedInManifestFile, 
   SearchTMUGUI.guiMain.resources - Embedded, ContainedInManifestFile, 
 ImageRuntimeVersion: v4.0.30319
 Assembly SearchTMUGUI, Version=0.0.*, Culture=Invariant Language (Invariant Country): 
@@ -18,8 +17,5 @@ Assembly System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=
 Assembly System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
 	hash=None, flags=None
 Class SearchTMUGUI.guiMain: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
-  :System.Windows.Forms.Form
-    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
-Class SearchTMUGUI.guiLoading: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.Form
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
