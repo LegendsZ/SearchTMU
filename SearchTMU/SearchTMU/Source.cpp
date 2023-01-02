@@ -71,7 +71,8 @@ void menu() {
 'exit' -> exit SearchTMU\n\
 'settings' -> open settings\n\
 'schedule' -> view schedule\n\
-'generate' -> generate route";
+'generate' -> generate route\n\
+'solve'    -> solve given map";
 		std::cout << "\n\n\n";
 		std::cout << ">";
 		std::string input;
@@ -143,6 +144,17 @@ void menu() {
 			//searchAlgoTimer->print();
 			searchAlgoTimerLOOP->print();
 
+			system("pause");
+		}
+		else if (input == "solve")
+		{
+			int width = 427;
+			int height = 280;
+			char** mapgrid = readGrid("map.txt");
+			printGrid(427, 280, mapgrid);
+			char** solved = searchAlgorithm::getIntelligentPath(mapgrid, 427, 280);
+			printGrid(427, 280, solved);
+			
 			system("pause");
 		}
 		else {
