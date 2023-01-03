@@ -153,7 +153,7 @@ void menu() {
 			char** mapgrid = readGrid("map.txt");
 			printGrid(427, 280, mapgrid);
 			char** solved = searchAlgorithm::getIntelligentPath(mapgrid, 427, 280);
-			printGrid(427, 280, solved);
+			//printGrid(427, 280, solved);
 			
 			system("pause");
 		}
