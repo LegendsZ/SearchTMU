@@ -18,7 +18,7 @@ public:
 
 	Color getColor(int x, int y) const;
 	void setColor(const Color& color, int x, int y);
-
+	void setColors(int x, int y, char** grid);
 	void Export(const char* path);
 	
 private:

@@ -127,14 +127,15 @@ void menu() {
 			{
 				printGrid(x, y, tempgrid);
 				Image image(x, y);
-				for (int i = 0; i < y; i++)
+				image.setColors(x, y, tempgrid);
+				/*for (int i = 0; i < y; i++)
 				{
 					for (int j = 0; j < x; j++)
 					{
 						
 						image.setColor(Color((float)tempgrid[i][j], (float)tempgrid[i][j], (float)tempgrid[i][j]), j, y - i - 1);
 					}
-				}
+				}*/
 				image.Export("image.bmp");
 				//printGrid(x, y, tempgrid);
 			}
@@ -151,9 +152,10 @@ void menu() {
 			int width = 427;
 			int height = 280;
 			char** mapgrid = readGrid("map.txt");
-			printGrid(427, 280, mapgrid);
 			char** solved = searchAlgorithm::getIntelligentPath(mapgrid, 427, 280);
-			//printGrid(427, 280, solved);
+			Image image(width, height);
+			image.setColors(width, height, solved);
+			image.Export("image.bmp");
 			
 			system("pause");
 		}

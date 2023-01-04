@@ -2,7 +2,9 @@
 #include "Image.h"
 #include <iostream>
 #include  <fstream>
-
+#define BLACK 0
+#define WHITE 1
+#define RED 2
 Color::Color() :r(0), g(0), b(0)
 {
 }
@@ -22,6 +24,41 @@ Image::Image(int width, int height) :m_width(width), m_height(height), m_colors(
 Image::~Image()
 {
 }
+
+
+
+
+
+
+
+void Image::setColors(int x, int y, char**grid)
+{
+	for (int i = 0; i < y; i++)
+	{
+		for (int j = 0; j < x; j++)
+		{
+			switch(grid[y - i - 1][j])
+			{
+				case ' ':
+					setColor(Color(1, 1, 1), j, i);
+					break;
+				case '.':
+					setColor(Color(1,0,0), j, i);
+					if (i > 0 && j > 0 && j < m_width - 1)
+					{
+						setColor(Color(1, 0, 0), j + 1, i);
+						setColor(Color(1, 0, 0), j - 1, i);
+						setColor(Color(1, 0, 0), j, i + 1);
+					}
+					break;
+				default:
+					setColor(Color(0, 0, 0), j, i);
+
+			}
+		}
+	}
+}
+
 
 Color Image::getColor(int x, int y) const
 {
