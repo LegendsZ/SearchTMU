@@ -2,9 +2,10 @@
 #include "schedule.h"
 #include "Image.h"
 #include "Timer.h"
+#include "coordinate.h"
 #pragma once
 
-char** generateMaze(const unsigned int& x, const unsigned int& y, const unsigned int& debrisChance);
+char** generateMaze(const unsigned int& x, const unsigned int& y, const unsigned int& debrisChance, pathcell& player, pathcell& dest);
 void printGrid(const int& x, const int& y, char** grid);
 char** readGrid(std::string fname, int* w, int* h);
 
@@ -12,8 +13,8 @@ void menu();
 void settings();
 
 
-const unsigned int x = 750;
-const unsigned int y = 750;
+const unsigned int x = 100;
+const unsigned int y = 100;
 const unsigned int debrisChance = 10;
 char** grid = nullptr;
 
@@ -68,7 +69,8 @@ void menu() {
 'settings' -> open settings\n\
 'schedule' -> view schedule\n\
 'generate' -> generate route\n\
-'solve'    -> solve given map";
+'solve'    -> solve given map\n\
+'travel'   -> go to set locations";
 		std::cout << "\n\n\n";
 		std::cout << ">";
 		std::string input;
@@ -83,36 +85,32 @@ void menu() {
 			//view schedule
 		}
 		else if (input == "generate") {
-
-			grid = generateMaze(x, y, debrisChance);
+			pathcell player;
+			pathcell dest;
+			grid = generateMaze(x, y, debrisChance, player, dest);
 			std::cout << "\n\n";
-
 			//BELOW STARTS SOMETHING TO BE DELETED
 			Timer* searchAlgoTimer = new Timer();
 			unsigned int counter = 0;
+			std::vector<pathcell> path;
+			
 			searchAlgoTimer->start();
-			char** gridSln = searchAlgorithm::getIntelligentPath(grid, x, y);
+			searchAlgorithm::getIntelligentPath(grid, x, y, &path, player, dest);
 			searchAlgoTimer->stop();
 
 			std::cout << "Grid Size: " << x << " x " << y << "\n";
 			searchAlgoTimer->print();
 			//ABOVE IS SOMETHING TO BE DELETED
 
-			if (gridSln == nullptr) { std::cout << "No solutions\n"; }
+			if (path.size() == 0) { std::cout << "No solutions\n"; }
 			else
 			{
-				printGrid(x, y, gridSln);
+				printGrid(x, y, grid);
 				std::cout << "\n Would you like to export? (Y/y/N/n): ";
 				std::getline(std::cin, input);
 				if (input[0] == 'y' || input[0] == 'Y') {
 					Image image(x, y);
-					for (int i = 0; i < y; i++)
-					{
-						for (int j = 0; j < x; j++)
-						{
-							image.setColor(Color((float)gridSln[i][j], (float)gridSln[i][j], (float)gridSln[i][j]), j, y - i - 1);
-						}
-					}
+					image.setColors(x, y, grid);
 					image.Export("image.bmp");
 				}
 			}
@@ -123,9 +121,44 @@ void menu() {
 			int* width = new int;
 			int* height = new int;
 			char** mapgrid = readGrid("map.txt", width, height);
-			printGrid(*width, *height, mapgrid);
-			char** solved = searchAlgorithm::getIntelligentPath(mapgrid, 427, 280);
-			printGrid(*width, *height, solved);
+			std::vector<pathcell> path;
+			Timer* searchAlgoTimer = new Timer();
+			coordinate TMUcoords("TMUCoords.txt");
+			searchAlgoTimer->start();
+			pathcell p = *TMUcoords.getLocation("LIB");
+			searchAlgorithm::getIntelligentPath(mapgrid, *width, *height, &path, *TMUcoords.getLocation("SLC"), *TMUcoords.getLocation("TRS"));
+			searchAlgoTimer->stop();
+			searchAlgoTimer->print();
+			Image image(*width, *height);
+			std::cout << "Width: " << *width << std::endl;
+			std::cout << "Height: " << *height << std::endl;
+			image.setColors(*width, *height, mapgrid);
+			image.Export("image.bmp");
+			system("pause");
+		}
+		else if (input == "travel")
+		{
+			std::string user;
+			std::string dest;
+			std::cout << "Enter current location: ";
+			std::getline(std::cin, user);
+			std::cout << "Enter target destination: ";
+			std::getline(std::cin, dest);
+			int* width = new int;
+			int* height = new int;
+			char** mapgrid = readGrid("map.txt", width, height);
+			std::vector<pathcell> path;
+			Timer* searchAlgoTimer = new Timer();
+			coordinate TMUcoords("TMUCoords.txt");
+			searchAlgoTimer->start();
+			searchAlgorithm::getIntelligentPath(mapgrid, *width, *height, &path, *TMUcoords.getLocation(user), *TMUcoords.getLocation(dest));
+			searchAlgoTimer->stop();
+			searchAlgoTimer->print();
+			Image image(*width, *height);
+			std::cout << "Width: " << *width << std::endl;
+			std::cout << "Height: " << *height << std::endl;
+			image.setColors(*width, *height, mapgrid);
+			image.Export("image.bmp");
 			system("pause");
 		}
 		else {
@@ -193,7 +226,7 @@ char** readGrid(std::string fname, int* w, int* h) {
 	return grid;
 }
 
-char** generateMaze(const unsigned int& x, const unsigned int& y, const unsigned int& debrisChance) {
+char** generateMaze(const unsigned int& x, const unsigned int& y, const unsigned int& debrisChance, pathcell &player, pathcell &dest) {
 	char** grid = new char* [y];
 
 	//generates grid
@@ -223,6 +256,7 @@ char** generateMaze(const unsigned int& x, const unsigned int& y, const unsigned
 		unsigned int yp = rand() % y;
 		if (grid[yp][xp] == ' ') {
 			grid[yp][xp] = 'X';
+			player = pathcell(xp, yp);
 			break;
 		}
 	}
@@ -233,6 +267,7 @@ char** generateMaze(const unsigned int& x, const unsigned int& y, const unsigned
 		unsigned int yp = rand() % y;
 		if (grid[yp][xp] == ' ') {
 			grid[yp][xp] = 'D';
+			dest = pathcell(xp, yp);
 			break;
 		}
 	}

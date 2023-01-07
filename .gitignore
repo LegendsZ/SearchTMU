@@ -2,3 +2,9 @@
 *.log
 *.tlog
 *.obj
+*.obj
+*.obj
+*.recipe
+*.ipch
+*.tlog
+*.ilk

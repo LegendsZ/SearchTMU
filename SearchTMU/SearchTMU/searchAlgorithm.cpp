@@ -1,6 +1,16 @@
 #include "searchAlgorithm.h"
-
+#include <fstream>
 //path searchAlgorithm::myPath;
+
+pathcell::pathcell(int x, int y) : x(x), y(y)
+{
+}
+pathcell::pathcell() : x(0), y(0)
+{
+}
+pathcell::~pathcell()
+{
+}
 
 char** searchAlgorithm::getPath(char** grid, unsigned int& x, unsigned int& y)
 {
@@ -76,38 +86,42 @@ char** searchAlgorithm::nextDirection(char** grid, int x, int y)
 
 }
 
-char** searchAlgorithm::getIntelligentPath(char** grid, const unsigned int& sizeX, const unsigned int& sizeY)
+void searchAlgorithm::printPath(std::vector<pathcell>* path)
 {
-	int pX = -1, pY = -1, dX = -1, dY = -1;
+	std::ofstream f;
+	f.open("path.txt");
+	for (auto pc : *path)
+	{
+		f << pc.x << " " << pc.y << std::endl;
+	}
+	f.close();
+}
 
-	for (int i = 0; i < sizeY; i++) {
-		for (int j = 0; j < sizeX; j++) {
-			if (grid[i][j] == 'D') {
-				dX = j;
-				dY = i;
-			}else if (grid[i][j] == 'X') {
-				pX = j;
-				pY = i;
-			}
-		}
+void searchAlgorithm::getIntelligentPath(char** grid, const unsigned int& sizeX, const unsigned int& sizeY, std::vector<pathcell>* path, pathcell& player, pathcell& dest)
+{
+	std::cout << player.y << ":" << player.x << std::endl;
+	std::cout << dest.y << ":" << dest.x << std::endl;
+	grid[player.y][player.x] = 'X';
+	grid[dest.y][dest.x] = 'D';
+	
+	if (player.x * player.y * dest.x * dest.y < 0) {//smth went wrong
+		return;
 	}
-	if (pX * pY * dX * dY < 0) {//smth went wrong
-		return nullptr;
-	}
-	int upperY = (pY > dY) ? pY + 1 : dY + 1;
-	int lowerY = (pY > dY) ? dY - 1 : pY - 1;
-	int upperX = (pX > dX) ? pX + 1 : dX + 1;
-	int lowerX = (pX > dX) ? dX - 1 : pX - 1;
+	//variables below are used to limit the area of search
+	int upperY = (player.y > dest.y) ? player.y + 1 : dest.y + 1;
+	int lowerY = (player.y > dest.y) ? dest.y - 1 : player.y - 1;
+	int upperX = (player.x > dest.x) ? player.x + 1 : dest.x + 1;
+	int lowerX = (player.x > dest.x) ? dest.x - 1 : player.x - 1;
 	int limit = (sizeX > sizeY) ? sizeX : sizeY;
 	for (int i = 0; i < limit; i++)
 	{
-		char** tempgrid = nextIntelligentDirection(mapLimiter(grid, upperY + i, lowerY - i, upperX + i, lowerX - i, sizeY, sizeX, LIMIT), sizeX, sizeY, pX, pY, dX, dY,0);
+		char** tempgrid = nextIntelligentDirection(mapLimiter(grid, upperY + i, lowerY - i, upperX + i, lowerX - i, sizeY, sizeX, LIMIT), sizeX, sizeY, player.x, player.y, dest.x, dest.y,0, path);
 		mapLimiter(grid, upperY + i, lowerY - i, upperX + i, lowerX - i, sizeY, sizeX, RELEASE);
 
-		if (tempgrid != nullptr) return tempgrid;
+		if (tempgrid != nullptr) return;
 
 	}
-	return nullptr;
+	return;
 }
 
 
@@ -159,8 +173,9 @@ char** searchAlgorithm::mapLimiter(char** grid, int upperY, int lowerY, int uppe
 }
 
 
-char** searchAlgorithm::nextIntelligentDirection(char** grid, const int sizeX, const int sizeY, int pX, int pY, int dX, int dY, int loops)
+char** searchAlgorithm::nextIntelligentDirection(char** grid, const int sizeX, const int sizeY, int pX, int pY, int dX, int dY, int loops, std::vector<pathcell>* path)
 {
+	path->push_back(pathcell(pX, pY));
 	//Check if destination is found, if true then return adjusted grid with path
 	if (grid[pY - 1][pX] == 'D')
 	{
@@ -193,28 +208,28 @@ char** searchAlgorithm::nextIntelligentDirection(char** grid, const int sizeX, c
 		if (grid[pY][pX + xstep] == ' ')
 		{
 			grid[pY][pX + xstep] = '.';
-			char** tempgrid = nextIntelligentDirection(grid, sizeX, sizeY, pX + xstep, pY, dX, dY, ++loops);
+			char** tempgrid = nextIntelligentDirection(grid, sizeX, sizeY, pX + xstep, pY, dX, dY, ++loops, path);
 			if (tempgrid == nullptr) { grid[pY][pX + xstep] = ' '; }
 			else return tempgrid;
 		}
 		if (grid[pY + ystep][pX] == ' ') //still gotta change this line and below such that the grid is accessed by [y][x] instead of [x][y]
 		{
 			grid[pY + ystep][pX] = '.';
-			char** tempgrid = nextIntelligentDirection(grid, sizeX, sizeY, pX, pY + ystep, dX, dY, ++loops);
+			char** tempgrid = nextIntelligentDirection(grid, sizeX, sizeY, pX, pY + ystep, dX, dY, ++loops, path);
 			if (tempgrid == nullptr) { grid[pY + ystep][pX] = ' '; }
 			else return tempgrid;
 		}
 		if (grid[pY - ystep][pX] == ' ')
 		{
 			grid[pY - ystep][pX] = '.';
-			char** tempgrid = nextIntelligentDirection(grid, sizeX, sizeY, pX, pY - ystep, dX, dY, ++loops);
+			char** tempgrid = nextIntelligentDirection(grid, sizeX, sizeY, pX, pY - ystep, dX, dY, ++loops, path);
 			if (tempgrid == nullptr) { grid[pY - ystep][pX] = ' '; }
 			else return tempgrid;
 		}
 		if (grid[pY][pX - xstep] == ' ')
 		{
 			grid[pY][pX - xstep] = '.';
-			char** tempgrid = nextIntelligentDirection(grid, sizeX, sizeY, pX - xstep, pY, dX, dY, ++loops);
+			char** tempgrid = nextIntelligentDirection(grid, sizeX, sizeY, pX - xstep, pY, dX, dY, ++loops, path);
 			if (tempgrid == nullptr) { grid[pY][pX - xstep] = ' '; }
 			else return tempgrid;
 		}
@@ -226,35 +241,35 @@ char** searchAlgorithm::nextIntelligentDirection(char** grid, const int sizeX, c
 		if (grid[pY + ystep][pX] == ' ') //still gotta change this line and below such that the grid is accessed by [y][x] instead of [x][y]
 		{
 			grid[pY + ystep][pX] = '.';
-			char** tempgrid = nextIntelligentDirection(grid, sizeX, sizeY, pX, pY + ystep, dX, dY, ++loops);
+			char** tempgrid = nextIntelligentDirection(grid, sizeX, sizeY, pX, pY + ystep, dX, dY, ++loops, path);
 			if (tempgrid == nullptr) { grid[pY + ystep][pX] = ' '; }
 			else return tempgrid;
 		}
 		if (grid[pY][pX + xstep] == ' ')
 		{
 			grid[pY][pX + xstep] = '.';
-			char** tempgrid = nextIntelligentDirection(grid, sizeX, sizeY, pX + xstep, pY, dX, dY, ++loops);
+			char** tempgrid = nextIntelligentDirection(grid, sizeX, sizeY, pX + xstep, pY, dX, dY, ++loops, path);
 			if (tempgrid == nullptr) { grid[pY][pX + xstep] = ' '; }
 			else return tempgrid;
 		}
 		if (grid[pY][pX - xstep] == ' ')
 		{
 			grid[pY][pX - xstep] = '.';
-			char** tempgrid = nextIntelligentDirection(grid, sizeX, sizeY, pX - xstep, pY, dX, dY, ++loops);
+			char** tempgrid = nextIntelligentDirection(grid, sizeX, sizeY, pX - xstep, pY, dX, dY, ++loops, path);
 			if (tempgrid == nullptr) { grid[pY][pX - xstep] = ' '; }
 			else return tempgrid;
 		}
 		if (grid[pY - ystep][pX] == ' ')
 		{
 			grid[pY - ystep][pX] = '.';
-			char** tempgrid = nextIntelligentDirection(grid, sizeX, sizeY, pX, pY - ystep, dX, dY, ++loops);
+			char** tempgrid = nextIntelligentDirection(grid, sizeX, sizeY, pX, pY - ystep, dX, dY, ++loops, path);
 			if (tempgrid == nullptr) { grid[pY - ystep][pX] = ' '; }
 			else return tempgrid;
 		}
 
 
 	}
-
+	path->pop_back();
 
 	return nullptr;
 }
