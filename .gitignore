@@ -8,3 +8,4 @@
 *.ipch
 *.tlog
 *.ilk
+*.sqlite
