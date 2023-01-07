@@ -6,33 +6,31 @@
 
 char** generateMaze(const unsigned int& x, const unsigned int& y, const unsigned int& debrisChance);
 void printGrid(const int& x, const int& y, char** grid);
-char** readGrid(std::string fname);
+char** readGrid(std::string fname, int* w, int* h);
 
 void menu();
 void settings();
 
 
-const unsigned int x = 100;
-const unsigned int y = 100;
+const unsigned int x = 750;
+const unsigned int y = 750;
 const unsigned int debrisChance = 10;
-char** grid;
+char** grid = nullptr;
 
 int main() {
 
+	/*
 	char** gridRead = readGrid("readme.txt");
 	char** tempgrid = searchAlgorithm::getIntelligentPath(gridRead, 5,4);
 	if (tempgrid == nullptr) { std::cout << "No solutions\n"; }
 	else printGrid(5, 4, tempgrid); //i only put 5/4 for debugging purpose (need to make a grid class that stores member variables for this etc
 
 	system("pause");
-	system("cls");
+	system("cls");*/
 
 	system("title Projekt SearchTMU");
-	//initialization
-	//time_t x = time(0);
-	//std::cout << "\nSeed: " << x << "\n\n";
-	srand(time(0));
-	grid = nullptr;
+
+	srand(time(0)); //randomize seed
 	std::cout << "\
       ___  ___  ____     ________ ________         \n\
      / _ \\/ _ \\/ __ \\__ / / __/ //_/_  __/         \n\
@@ -43,12 +41,10 @@ int main() {
 /___/___/_/ |_/_/|_|\\___/_//_/ /_/ /_/  /_/\\____/  \n\
                                                    \n";
 	system("pause");
-	//printGrid(x,y,grid);
-	//std::cout << "\n\n\n===================\n";
 	menu();
 
 	//garbage collection below
-	for (int i = 0; i < x; i++) {
+	for (int i = 0; i < y; i++) {
 		delete[] grid[i];
 	}
 	std::cout << "Deleted everything!\n";
@@ -89,74 +85,47 @@ void menu() {
 		else if (input == "generate") {
 
 			grid = generateMaze(x, y, debrisChance);
-			//printGrid(x, y, grid);
 			std::cout << "\n\n";
 
-			unsigned int pX = 0;
-			unsigned int pY = 0;
-			for (int i = 0; i < y; i++) {
-				for (int j = 0; j < x; j++) {
-					if (grid[i][j] == 'X') {
-						pX = j;
-						pY = i;
-					}
-				}
-			}
-			//printGrid(x, y, searchAlgorithm::getPath(grid, pX, pY));
-
 			//BELOW STARTS SOMETHING TO BE DELETED
-			char** tgridLOOP = nullptr;
-			Timer* searchAlgoTimerLOOP = new Timer();
+			Timer* searchAlgoTimer = new Timer();
 			unsigned int counter = 0;
-			while (tgridLOOP == nullptr) {
-				searchAlgoTimerLOOP->start();
-				tgridLOOP = searchAlgorithm::getIntelligentPath(grid, x, y);
-				searchAlgoTimerLOOP->stop();
-				counter++;
-			}
-			char** tempgrid = tgridLOOP;
+			searchAlgoTimer->start();
+			char** gridSln = searchAlgorithm::getIntelligentPath(grid, x, y);
+			searchAlgoTimer->stop();
+
+			std::cout << "Grid Size: " << x << " x " << y << "\n";
+			searchAlgoTimer->print();
 			//ABOVE IS SOMETHING TO BE DELETED
 
-			//Timer* searchAlgoTimer = new Timer();
-			//searchAlgoTimer->start();
-			//char** tempgrid = searchAlgorithm::getIntelligentPath(grid, x, y);
-			//searchAlgoTimer->stop();
-			
-			if (tempgrid == nullptr) { std::cout << "No solutions\n"; }
+			if (gridSln == nullptr) { std::cout << "No solutions\n"; }
 			else
 			{
-				printGrid(x, y, tempgrid);
-				Image image(x, y);
-				image.setColors(x, y, tempgrid);
-				/*for (int i = 0; i < y; i++)
-				{
-					for (int j = 0; j < x; j++)
+				printGrid(x, y, gridSln);
+				std::cout << "\n Would you like to export? (Y/y/N/n): ";
+				std::getline(std::cin, input);
+				if (input[0] == 'y' || input[0] == 'Y') {
+					Image image(x, y);
+					for (int i = 0; i < y; i++)
 					{
-						
-						image.setColor(Color((float)tempgrid[i][j], (float)tempgrid[i][j], (float)tempgrid[i][j]), j, y - i - 1);
+						for (int j = 0; j < x; j++)
+						{
+							image.setColor(Color((float)gridSln[i][j], (float)gridSln[i][j], (float)gridSln[i][j]), j, y - i - 1);
+						}
 					}
-				}*/
-				image.Export("image.bmp");
-				//printGrid(x, y, tempgrid);
+					image.Export("image.bmp");
+				}
 			}
-			//printGrid(x, y, searchAlgorithm::getIntelligentPath(grid, x, y);
-
-			std::cout << "Grid Size: " << x << " x " << y << "\nAmount of attempts: " << counter<<"\n";
-			//searchAlgoTimer->print();
-			searchAlgoTimerLOOP->print();
-
 			system("pause");
 		}
 		else if (input == "solve")
 		{
-			int width = 427;
-			int height = 280;
-			char** mapgrid = readGrid("map.txt");
+			int* width = new int;
+			int* height = new int;
+			char** mapgrid = readGrid("map.txt", width, height);
+			printGrid(*width, *height, mapgrid);
 			char** solved = searchAlgorithm::getIntelligentPath(mapgrid, 427, 280);
-			Image image(width, height);
-			image.setColors(width, height, solved);
-			image.Export("image.bmp");
-			
+			printGrid(*width, *height, solved);
 			system("pause");
 		}
 		else {
@@ -198,7 +167,8 @@ void settings() {
 	}
 }
 
-char** readGrid(std::string fname) {
+char** readGrid(std::string fname, int* w, int* h) {
+	*w = 0;
 	std::vector<std::string> lines;
 	std::fstream myfile;
 	myfile.open(fname, std::ios::in);
@@ -206,6 +176,9 @@ char** readGrid(std::string fname) {
 		std::string line;
 		while (getline(myfile, line)) {
 			lines.push_back(line);
+			if (line.length() > *w) {
+				*w = line.length();
+			}
 		}
 		myfile.close();
 	}
@@ -216,20 +189,21 @@ char** readGrid(std::string fname) {
 			grid[i][j] = lines[i][j];
 		}
 	}
+	*h = lines.size();
 	return grid;
 }
 
 char** generateMaze(const unsigned int& x, const unsigned int& y, const unsigned int& debrisChance) {
-	char** grid = new char*[y];
+	char** grid = new char* [y];
 
 	//generates grid
 	for (int i = 0; i < y; i++) {
 		grid[i] = new char[x];
 		for (int q = 0; q < x; q++) {
-			if (i == 0 || i==y-1) {
+			if (i == 0 || i == y - 1) {
 				grid[i][q] = '-';
 			}
-			else if (q == 0 || q== x-1) {
+			else if (q == 0 || q == x - 1) {
 				grid[i][q] = '|';
 			}
 			else {
@@ -262,7 +236,7 @@ char** generateMaze(const unsigned int& x, const unsigned int& y, const unsigned
 			break;
 		}
 	}
-	
+
 	return grid;
 }
 
