@@ -9,3 +9,7 @@
 *.tlog
 *.ilk
 *.sqlite
+SearchTMU/SearchTMU/x64/Debug/SearchTMU.tlog/CL.read.1.tlog
+*.obj
+SearchTMU/SearchTMU/x64/Debug/vc143.idb
+SearchTMU/SearchTMU/x64/Debug/vc143.pdb
