@@ -40,6 +40,11 @@ long long TimerCustom::getSeconds()
 
 bool TimerCustom::print()
 {
-	//std::cout << "Statistics\nNanoseconds: " << getNanoseconds() << "\nMicroseconds: " << getMicroseconds() << "\nMilliseconds: " << getMilliseconds() << "\nSeconds: " << getSeconds() << "\n";
-	return false;
+	std::cout << "Statistics\nNanoseconds: " << getNanoseconds() << "\nMicroseconds: " << getMicroseconds() << "\nMilliseconds: " << getMilliseconds() << "\nSeconds: " << getSeconds() << "\n";
+	return true;
+}
+
+System::String^ TimerCustom::toString()
+{
+	return "Statistics\nNanoseconds: " + getNanoseconds().ToString() + "\nMicroseconds: " + getMicroseconds().ToString() + "\nMilliseconds: " + getMilliseconds().ToString() + "\nSeconds: " + getSeconds().ToString() + "\n";
 }
