@@ -1,6 +1,9 @@
 #pragma once
 #include <time.h>
 #include "TimerCustom.h"
+#include "coordinate.h"
+#include "Image.h"
+#include <fstream>
 
 struct information {
 	static unsigned int x;
@@ -47,7 +50,8 @@ namespace SearchTMUGUI {
 	private: System::Windows::Forms::Label^ lblInfo;
 	protected:
 	private: System::Windows::Forms::Label^ lblTitle;
-	private: System::Windows::Forms::Button^ btnGenerate;
+	private: System::Windows::Forms::Button^ btnSolve;
+
 	private: System::Windows::Forms::Button^ btnSchedule;
 
 
@@ -82,7 +86,7 @@ namespace SearchTMUGUI {
 		{
 			this->lblInfo = (gcnew System::Windows::Forms::Label());
 			this->lblTitle = (gcnew System::Windows::Forms::Label());
-			this->btnGenerate = (gcnew System::Windows::Forms::Button());
+			this->btnSolve = (gcnew System::Windows::Forms::Button());
 			this->btnSchedule = (gcnew System::Windows::Forms::Button());
 			this->btnSettings = (gcnew System::Windows::Forms::Button());
 			this->btnSet = (gcnew System::Windows::Forms::Button());
@@ -122,19 +126,19 @@ namespace SearchTMUGUI {
 			this->lblTitle->TabIndex = 4;
 			this->lblTitle->Text = L"SearchTMU";
 			// 
-			// btnGenerate
+			// btnSolve
 			// 
-			this->btnGenerate->BackColor = System::Drawing::Color::White;
-			this->btnGenerate->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->btnGenerate->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->btnSolve->BackColor = System::Drawing::Color::White;
+			this->btnSolve->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btnSolve->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->btnGenerate->Location = System::Drawing::Point(11, 445);
-			this->btnGenerate->Name = L"btnGenerate";
-			this->btnGenerate->Size = System::Drawing::Size(173, 65);
-			this->btnGenerate->TabIndex = 6;
-			this->btnGenerate->Text = L"Generate";
-			this->btnGenerate->UseVisualStyleBackColor = false;
-			this->btnGenerate->Click += gcnew System::EventHandler(this, &guiMain::btnGenerate_Click);
+			this->btnSolve->Location = System::Drawing::Point(11, 445);
+			this->btnSolve->Name = L"btnSolve";
+			this->btnSolve->Size = System::Drawing::Size(173, 65);
+			this->btnSolve->TabIndex = 6;
+			this->btnSolve->Text = L"Solve";
+			this->btnSolve->UseVisualStyleBackColor = false;
+			this->btnSolve->Click += gcnew System::EventHandler(this, &guiMain::btnSolve_Click);
 			// 
 			// btnSchedule
 			// 
@@ -228,6 +232,7 @@ namespace SearchTMUGUI {
 			this->pbMain->Location = System::Drawing::Point(300, 200);
 			this->pbMain->Name = L"pbMain";
 			this->pbMain->Size = System::Drawing::Size(0, 0);
+			this->pbMain->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pbMain->TabIndex = 14;
 			this->pbMain->TabStop = false;
 			// 
@@ -245,7 +250,7 @@ namespace SearchTMUGUI {
 			this->Controls->Add(this->btnSet);
 			this->Controls->Add(this->btnSettings);
 			this->Controls->Add(this->btnSchedule);
-			this->Controls->Add(this->btnGenerate);
+			this->Controls->Add(this->btnSolve);
 			this->Controls->Add(this->lblInfo);
 			this->Controls->Add(this->lblTitle);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
@@ -265,9 +270,35 @@ namespace SearchTMUGUI {
 #pragma endregion
 		char** generateMaze(const unsigned int& x, const unsigned int& y, const unsigned int& debrisChance);
 		System::Void guiMain_Shown(System::Object^ sender, System::EventArgs^ e);
-		System::Void btnGenerate_Click(System::Object^ sender, System::EventArgs^ e);
+		System::Void btnSolve_Click(System::Object^ sender, System::EventArgs^ e);
 		System::Void btnSettings_Click(System::Object^ sender, System::EventArgs^ e);
 		System::Void btnBack_Click(System::Object^ sender, System::EventArgs^ e);
 		System::Void btnSet_Click(System::Object^ sender, System::EventArgs^ e);
+
+		char** readGrid(std::string fname, int* w, int* h) {
+			*w = 0;
+			std::vector<std::string> lines;
+			std::fstream myfile;
+			myfile.open(fname, std::ios::in);
+			if (myfile.is_open()) {
+				std::string line;
+				while (getline(myfile, line)) {
+					lines.push_back(line);
+					if (line.length() > *w) {
+						*w = line.length();
+					}
+				}
+				myfile.close();
+			}
+			char** grid = new char* [lines.size()];
+			for (int i = 0; i < lines.size(); i++) {
+				grid[i] = new char[lines[0].length()];
+				for (int j = 0; j < lines[0].length(); j++) {
+					grid[i][j] = lines[i][j];
+				}
+			}
+			*h = lines.size();
+			return grid;
+		}
 };
 }

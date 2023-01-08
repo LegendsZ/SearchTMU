@@ -2,18 +2,18 @@
 
 #pragma once
 #include <vector>
-
-class Bitmap {
-public:
-	char vals[3];
-	int getVal(int index);
-private:
-};
+#include <iostream>
 
 class Gridmap {
 public:
 	static std::vector<Gridmap*> maps;
-	Bitmap* m_map;
-	Gridmap(const int& width, const int& height);
+	char** m_map;
+	int m_width;
+	int m_height;
+	int m_size;
+
+	Gridmap(const int& width, const int& height, char def = 0);
+	int const getVal(const int& x, const int& y);
+	void const print();
 private:
 };

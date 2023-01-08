@@ -20,18 +20,18 @@ System::Void SearchTMUGUI::guiMain::guiMain_Shown(System::Object^ sender, System
 		Threading::Thread::Sleep(1);
 
 		lblTitle->Location = System::Drawing::Point(lblTitle->Location.X, lblTitle->Location.Y + 5);
-		btnGenerate->Location = System::Drawing::Point(btnGenerate->Location.X, btnGenerate->Location.Y - 10);
+		btnSolve->Location = System::Drawing::Point(btnSolve->Location.X, btnSolve->Location.Y - 10);
 		btnSchedule->Location = System::Drawing::Point(btnSchedule->Location.X, btnSchedule->Location.Y - 10);
 		btnSettings->Location = System::Drawing::Point(btnSettings->Location.X, btnSettings->Location.Y - 10);
 
 		lblTitle->Refresh();
-		btnGenerate->Refresh();
+		btnSolve->Refresh();
 		btnSchedule->Refresh();
 		btnSettings->Refresh();
 	}
 }
 
-System::Void SearchTMUGUI::guiMain::btnGenerate_Click(System::Object^ sender, System::EventArgs^ e)
+System::Void SearchTMUGUI::guiMain::btnSolve_Click(System::Object^ sender, System::EventArgs^ e)
 {
 	information::timer->start();
 	information::grid = generateMaze(information::x, information::y, information::debrisChance);
@@ -41,6 +41,27 @@ System::Void SearchTMUGUI::guiMain::btnGenerate_Click(System::Object^ sender, Sy
 		pbMain->Location = System::Drawing::Point(pbMain->Location.X - 1, pbMain->Location.Y - 1);
 		pbMain->Refresh();
 	}
+	
+
+	int* width = new int;
+	int* height = new int;
+	char** mapgrid = readGrid("map.txt", width, height);
+	std::vector<pathcell> path;
+	TimerCustom* searchAlgoTimer = new TimerCustom();
+	coordinate TMUcoords("TMUCoords.txt");
+	searchAlgoTimer->start();
+	pathcell p = *TMUcoords.getLocation("LIB");
+	searchAlgorithm::getIntelligentPath(mapgrid, *width, *height, &path, *TMUcoords.getLocation("SLC"), *TMUcoords.getLocation("TRS"));
+	searchAlgoTimer->stop();
+	searchAlgoTimer->print();
+	lblInfo->Text = searchAlgoTimer->toString();
+	SearchTMU::Image image(*width, *height);
+	std::cout << "Width: " << *width << std::endl;
+	std::cout << "Height: " << *height << std::endl;
+	image.setColors(*width, *height, mapgrid);
+	image.Export("image.bmp");
+
+	pbMain->Image = System::Drawing::Image::FromFile("image.bmp");
 }
 
 System::Void SearchTMUGUI::guiMain::btnSettings_Click(System::Object^ sender, System::EventArgs^ e)
@@ -49,7 +70,7 @@ System::Void SearchTMUGUI::guiMain::btnSettings_Click(System::Object^ sender, Sy
 		//Threading::Thread::Sleep(1);
 
 		lblTitle->Location = System::Drawing::Point(lblTitle->Location.X, lblTitle->Location.Y - 5);
-		btnGenerate->Location = System::Drawing::Point(btnGenerate->Location.X, btnGenerate->Location.Y + 10);
+		btnSolve->Location = System::Drawing::Point(btnSolve->Location.X, btnSolve->Location.Y + 10);
 		btnSchedule->Location = System::Drawing::Point(btnSchedule->Location.X, btnSchedule->Location.Y + 10);
 		btnSettings->Location = System::Drawing::Point(btnSettings->Location.X, btnSettings->Location.Y + 10);
 		
@@ -71,7 +92,7 @@ System::Void SearchTMUGUI::guiMain::btnBack_Click(System::Object^ sender, System
 		//Threading::Thread::Sleep(1);
 
 		lblTitle->Location = System::Drawing::Point(lblTitle->Location.X, lblTitle->Location.Y + 5);
-		btnGenerate->Location = System::Drawing::Point(btnGenerate->Location.X, btnGenerate->Location.Y - 10);
+		btnSolve->Location = System::Drawing::Point(btnSolve->Location.X, btnSolve->Location.Y - 10);
 		btnSchedule->Location = System::Drawing::Point(btnSchedule->Location.X, btnSchedule->Location.Y - 10);
 		btnSettings->Location = System::Drawing::Point(btnSettings->Location.X, btnSettings->Location.Y - 10);
 
