@@ -115,7 +115,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="coordinate.cpp" />
     <ClCompile Include="guiMain.cpp" />
+    <ClCompile Include="Image.cpp" />
     <ClCompile Include="searchAlgorithm.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="TimerCustom.cpp" />
@@ -129,9 +131,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="coordinate.h" />
     <ClInclude Include="guiMain.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="Image.h" />
     <ClInclude Include="searchAlgorithm.h" />
     <ClInclude Include="TimerCustom.h" />
   </ItemGroup>

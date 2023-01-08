@@ -33,6 +33,12 @@
     <ClCompile Include="TimerCustom.cpp">
       <Filter>Source Files\Supporting</Filter>
     </ClCompile>
+    <ClCompile Include="coordinate.cpp">
+      <Filter>Source Files\Supporting</Filter>
+    </ClCompile>
+    <ClCompile Include="Image.cpp">
+      <Filter>Source Files\Supporting</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="guiMain.h">
@@ -42,6 +48,12 @@
       <Filter>Header Files\Supporting</Filter>
     </ClInclude>
     <ClInclude Include="TimerCustom.h">
+      <Filter>Header Files\Supporting</Filter>
+    </ClInclude>
+    <ClInclude Include="coordinate.h">
+      <Filter>Header Files\Supporting</Filter>
+    </ClInclude>
+    <ClInclude Include="Image.h">
       <Filter>Header Files\Supporting</Filter>
     </ClInclude>
   </ItemGroup>

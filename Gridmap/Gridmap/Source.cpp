@@ -4,7 +4,7 @@ int main()
 {
     system("title Gridmap Demonstration");
 
-    Gridmap map(15, 15,0);
+    Gridmap map(15, 15,'.');
     map.print();
 
     system("pause");
