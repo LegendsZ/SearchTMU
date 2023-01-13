@@ -51,6 +51,12 @@ void Image::setColors(int x, int y, char**grid)
 						setColor(Color(1, 0, 0), j, i + 1);
 					}
 					break;
+				case '@':
+					setColor(Color(0, 0, 1), j, i);
+					break;
+				case '!':
+					setColor(Color(0, 1, 1), j, i);
+					break;
 				default:
 					setColor(Color(0, 0, 0), j, i);
 

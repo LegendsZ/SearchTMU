@@ -4,14 +4,9 @@
 #include <vector>
 #define LIMIT 1
 #define RELEASE 2
+#include "coordinate.h"
 
-struct pathcell
-{
-	int x, y;
-	pathcell();
-	pathcell(int x, int y);
-	~pathcell();
-};
+
 class searchAlgorithm {
 
 public:
@@ -23,6 +18,7 @@ public:
 	static void getIntelligentPath(char** grid, const unsigned int& sizeX, const unsigned int& sizeY, std::vector<pathcell> *path, pathcell& player, pathcell& dest);
 	static char** nextIntelligentDirection(char** grid, const int sizeX, const int sizeY,int pX, int pY, int dX, int dY, int loops, std::vector<pathcell>* path);
 	static char** mapLimiter(char** grid, int upperY, int lowerY, int upperX, int lowerX, int sizeY, int sizeX, int state);
+	//static char** PointToPoint();
 	static void DprintGrid(const int& x, const int& y, char** grid) { //debugging purposes only
 		for (int i = 0; i < y; i++) {
 			for (int q = 0; q < x; q++) {

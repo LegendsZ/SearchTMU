@@ -1,16 +1,10 @@
 #include "searchAlgorithm.h"
 #include <fstream>
+#include "Grid.h"
+#include "Image.h"
 //path searchAlgorithm::myPath;
 
-pathcell::pathcell(int x, int y) : x(x), y(y)
-{
-}
-pathcell::pathcell() : x(0), y(0)
-{
-}
-pathcell::~pathcell()
-{
-}
+
 
 char** searchAlgorithm::getPath(char** grid, unsigned int& x, unsigned int& y)
 {
@@ -101,12 +95,14 @@ void searchAlgorithm::getIntelligentPath(char** grid, const unsigned int& sizeX,
 {
 	std::cout << player.y << ":" << player.x << std::endl;
 	std::cout << dest.y << ":" << dest.x << std::endl;
+	std::cout << grid[player.y][player.x] << std::endl;
+	std::cout << grid[dest.y][dest.x] << std::endl;
 	grid[player.y][player.x] = 'X';
 	grid[dest.y][dest.x] = 'D';
-	
-	if (player.x * player.y * dest.x * dest.y < 0) {//smth went wrong
+	std::cout << player.x * player.y * dest.x * dest.y << std::endl;
+	/*if (player.x * player.y * dest.x * dest.y < 0) {//smth went wrong
 		return;
-	}
+	}*/
 	//variables below are used to limit the area of search
 	int upperY = (player.y > dest.y) ? player.y + 1 : dest.y + 1;
 	int lowerY = (player.y > dest.y) ? dest.y - 1 : player.y - 1;
@@ -175,8 +171,14 @@ char** searchAlgorithm::mapLimiter(char** grid, int upperY, int lowerY, int uppe
 
 char** searchAlgorithm::nextIntelligentDirection(char** grid, const int sizeX, const int sizeY, int pX, int pY, int dX, int dY, int loops, std::vector<pathcell>* path)
 {
+	Image image(sizeX, sizeY);
+	image.setColors(sizeX, sizeY, grid);
+	image.Export("image.bmp");
 	path->push_back(pathcell(pX, pY));
+	
 	//Check if destination is found, if true then return adjusted grid with path
+
+
 	if (grid[pY - 1][pX] == 'D')
 	{
 		grid[pY][pX] = 'L';
@@ -205,6 +207,7 @@ char** searchAlgorithm::nextIntelligentDirection(char** grid, const int sizeX, c
 	//Check magnitude of distance in x and y coordinate
 	if (abs(dX - pX) > abs(dY - pY) || dX == pX)
 	{
+		
 		if (grid[pY][pX + xstep] == ' ')
 		{
 			grid[pY][pX + xstep] = '.';

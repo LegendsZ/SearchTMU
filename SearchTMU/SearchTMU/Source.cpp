@@ -70,7 +70,8 @@ void menu() {
 'schedule' -> view schedule\n\
 'generate' -> generate route\n\
 'solve'    -> solve given map\n\
-'travel'   -> go to set locations";
+'travel'   -> go to set locations\n\
+'lmao      -> lmao\n";
 		std::cout << "\n\n\n";
 		std::cout << ">";
 		std::string input;
@@ -160,6 +161,129 @@ void menu() {
 			image.setColors(*width, *height, mapgrid);
 			image.Export("image.bmp");
 			system("pause");
+		}
+		else if (input == "lmao")
+		{
+			std::ofstream newmap;
+			int* width = new int;
+			int* height = new int;
+			char** lmaogrid = readGrid("map.txt", width, height);
+			Image image(*width, *height);
+			for (int y = 0; y < *height; y++)
+			{
+				for (int x = 0; x < *width; x++)
+				{
+					
+					if (lmaogrid[y][x] == '@')
+					{
+						if (lmaogrid[y - 1][x] == '#' || lmaogrid[y + 1][x] == '#' || lmaogrid[y][x + 1] == '#' || lmaogrid[y][x - 1] == '#')
+						{
+							lmaogrid[y][x] = ' ';
+						}
+					}
+				}
+			}
+			for (int y = 0; y < *height; y++)
+			{
+				for (int x = 0; x < *width; x++)
+				{
+					if (lmaogrid[y][x] == '@')
+					{
+						if (lmaogrid[y - 1][x] == ' ' || lmaogrid[y + 1][x] == ' ' || lmaogrid[y][x + 1] == ' ' || lmaogrid[y][x - 1] == ' ')
+						{
+							lmaogrid[y][x] = '!';
+						}
+					}
+				}
+			}
+			for (int y = 0; y < *height; y++)
+			{
+				for (int x = 0; x < *width; x++)
+				{
+					if (y == 311 && x == 634)
+					{
+						std::cout << lmaogrid[y][x] << std::endl;
+					}
+					int garbage = 0;
+					if (lmaogrid[y][x] == '#')
+					{
+						if (y == 2 && x == 27)
+						{
+							std::cout << "OK" << std::endl;
+						}
+						for (int i = -1; i < 2; i++)
+						{
+							for (int j = -1; j < 2; j++)
+							{
+								if (lmaogrid[y + i][x + j] != ' ' && lmaogrid[y + i][x + j] != '!')
+								{ 
+									garbage++;
+								}
+							}
+						}
+					}
+					if (garbage == 4)
+					{
+						if (lmaogrid[y - 1][x] == ' ')
+						{
+							int inc = 1;
+							std::cout << y << ":" << x << std::endl;
+							while (!(lmaogrid[y - inc][x] == '#') && !(lmaogrid[y - inc][x] == '-'))
+							{
+
+								lmaogrid[y - inc][x] = ' ';
+								inc++;
+							}
+						}
+						else if (lmaogrid[y + 1][x] == ' ')
+						{
+							int inc = 1;
+							while (!(lmaogrid[y - inc][x] == '#') && !(lmaogrid[y + inc][x] == '-'))
+							{
+								lmaogrid[y + inc][x] = ' ';
+								inc++;
+							}
+						}
+						if (lmaogrid[y][x - 1] == ' ')
+						{
+							int inc = 1;
+							while (!(lmaogrid[y][x - inc] == '#') && !(lmaogrid[y][x - inc] == '|'))
+							{
+								lmaogrid[y][x - inc] = ' ';
+								inc++;
+							}
+						}
+						else if (lmaogrid[y][x + 1] == ' ')
+						{
+							int inc = 1;
+							while (!(lmaogrid[y][x + inc] == '#') && !(lmaogrid[y][x + inc] == '|'))
+							{
+								lmaogrid[y][x + inc] = ' ';
+								inc++;
+							}
+						}
+					}
+				}
+			}
+			std::ofstream map;
+			map.open("map1.txt");
+			for (int y = 0; y < *height; y++)
+			{
+				for (int x = 0; x < *width; x++)
+				{
+					if (lmaogrid[y][x] == '!')
+					{
+						lmaogrid[y][x] = ' ';
+					}
+					map << lmaogrid[y][x];
+				}
+				map << std::endl;
+			}
+			map.close();
+			image.setColors(*width, *height, lmaogrid);
+			image.Export("image.bmp");
+			system("pause");
+
 		}
 		else {
 			std::cout << "Error: Unrecognized command!\n";
