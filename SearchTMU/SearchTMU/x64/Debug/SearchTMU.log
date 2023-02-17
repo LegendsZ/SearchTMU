@@ -1,17 +1,4 @@
 ﻿  Image.cpp
-  Source.cpp
-C:\Users\WINDOWS\Documents\GitHub\SearchTMU\SearchTMU\SearchTMU\Source.cpp(34,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\WINDOWS\Documents\GitHub\SearchTMU\SearchTMU\SearchTMU\Source.cpp(213,23): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\WINDOWS\Documents\GitHub\SearchTMU\SearchTMU\SearchTMU\Source.cpp(225,19): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\WINDOWS\Documents\GitHub\SearchTMU\SearchTMU\SearchTMU\Source.cpp(233,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\WINDOWS\Documents\GitHub\SearchTMU\SearchTMU\SearchTMU\Source.cpp(235,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\WINDOWS\Documents\GitHub\SearchTMU\SearchTMU\SearchTMU\Source.cpp(243,22): warning C4018: '>=': signed/unsigned mismatch
-  coordinate.cpp
-  path.cpp
-C:\Users\WINDOWS\Documents\GitHub\SearchTMU\SearchTMU\SearchTMU\path.cpp(40,34): warning C4244: '+=': conversion from 'float' to 'unsigned int', possible loss of data
-C:\Users\WINDOWS\Documents\GitHub\SearchTMU\SearchTMU\SearchTMU\path.cpp(42,9): warning C4244: 'return': conversion from 'unsigned int' to 'float', possible loss of data
-C:\Users\WINDOWS\Documents\GitHub\SearchTMU\SearchTMU\SearchTMU\path.cpp(52,54): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
   searchAlgorithm.cpp
   Generating Code...
-  LINK : C:\Users\WINDOWS\Documents\GitHub\SearchTMU\SearchTMU\x64\Debug\SearchTMU.exe not found or not built by the last incremental link; performing full link
   SearchTMU.vcxproj -> C:\Users\WINDOWS\Documents\GitHub\SearchTMU\SearchTMU\x64\Debug\SearchTMU.exe

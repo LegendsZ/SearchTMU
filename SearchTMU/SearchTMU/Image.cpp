@@ -39,6 +39,9 @@ void Image::setColors(int x, int y, char**grid)
 		{
 			switch(grid[y - i - 1][j])
 			{
+				case '?':
+				setColor(Color(1, 1, 1), j, i);
+				break;
 				case ' ':
 					setColor(Color(1, 1, 1), j, i);
 					break;
