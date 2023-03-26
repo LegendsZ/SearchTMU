@@ -1,11 +1,7 @@
-#include <iostream>
-#include "Graph.h"
+#include "Node.h"
 
 int main()
 {
-    system("title Graph");
-    Graph x();
-
-
-    system("pause");
+	Node TMUnodes("graph.txt");
+	TMUnodes.printPath(TMUnodes.returnpath("DunE", "Gould"));
 }
