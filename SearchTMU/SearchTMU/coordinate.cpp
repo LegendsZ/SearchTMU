@@ -1,5 +1,6 @@
 #include "coordinate.h"
 #include <fstream>
+#include <iostream>
 
 pathcell::pathcell(int x, int y) : x(x), y(y)
 {
@@ -42,18 +43,19 @@ coordinate::coordinate(std::string filename):landmarks(std::vector<Landmark>()),
 	std::string NAME;
 	std::string X;
 	std::string Y;
+	std::string type;
 	while (f.peek() != EOF)
 	{
-		/*
+		
 		f >> type;
 		if (type == "L")
 		{
 			f >> NAME;
-			std::string X;
-			std::string Y;
 			f >> X;
 			f >> Y;
 			landmarks.push_back(Landmark(NAME, std::stoi(X), std::stoi(Y)));
+			std::cout << X << std::endl;
+			std::cout << Y << std::endl;
 		}
 		else if (type == "S")
 		{
@@ -67,12 +69,8 @@ coordinate::coordinate(std::string filename):landmarks(std::vector<Landmark>()),
 			f >> Ystart;
 			f >> Yend;
 			streets.push_back(Street(NAME, std::stoi(Xstart), std::stoi(Xend), std::stoi(Ystart), std::stoi(Yend)));
-		}*/
+		}
 
-			f >> NAME;
-			f >> X;
-			f >> Y;
-			landmarks.push_back(Landmark(NAME, std::stoi(X), std::stoi(Y)));
 	}
 	f.close();
 }

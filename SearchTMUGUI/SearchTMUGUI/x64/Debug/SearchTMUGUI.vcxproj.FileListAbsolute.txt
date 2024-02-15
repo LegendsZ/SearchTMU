@@ -7,3 +7,7 @@ C:\Users\WINDOWS\Documents\GitHub\SearchTMU\SearchTMUGUI\SearchTMUGUI\x64\Debug\
 C:\Users\WINDOWS\Documents\GitHub\SearchTMU\SearchTMUGUI\SearchTMUGUI\x64\Debug\SearchTMUGUI.guiMain.resources
 C:\Users\16479\Documents\GitHub\SearchTMU\SearchTMUGUI\SearchTMUGUI\x64\Debug\SearchTMUGUI.guiLoading.resources
 C:\Users\16479\Documents\GitHub\SearchTMU\SearchTMUGUI\SearchTMUGUI\x64\Debug\SearchTMUGUI.guiMain.resources
+C:\Users\lalal\source\repos\SearchTMU\SearchTMUGUI\SearchTMUGUI\x64\Debug\SearchTMUGUI.vcxproj.AssemblyReference.cache
+C:\Users\lalal\source\repos\SearchTMU\SearchTMUGUI\SearchTMUGUI\x64\Debug\SearchTMUGUI.vcxproj.SuggestedBindingRedirects.cache
+C:\Users\lalal\source\repos\SearchTMU\SearchTMUGUI\SearchTMUGUI\x64\Debug\SearchTMUGUI.guiMain.resources
+C:\Users\lalal\source\repos\SearchTMU\SearchTMUGUI\SearchTMUGUI\x64\Debug\SearchTMUGUI.vcxproj.GenerateResource.cache

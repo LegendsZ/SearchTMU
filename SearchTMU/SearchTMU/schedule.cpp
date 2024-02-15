@@ -19,3 +19,4 @@ std::vector<std::string>* schedule::getLines(std::string filePath)
 	}
 	return lines;
 }
+

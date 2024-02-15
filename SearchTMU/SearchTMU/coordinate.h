@@ -35,6 +35,7 @@ public:
 	std::vector<Street> streets;
 	coordinate(std::string filename);
 	pathcell* getLocation(std::string name);
+	std::string findStreet(int x, int y);
 private:
 	void createLandmarks(std::string name, int x, int y);
 	std::vector<Landmark> m_Landmarks;

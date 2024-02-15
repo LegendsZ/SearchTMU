@@ -124,7 +124,7 @@ void menu() {
 			char** mapgrid = readGrid("map.txt", width, height);
 			std::vector<pathcell> path;
 			Timer* searchAlgoTimer = new Timer();
-			coordinate TMUcoords("TMUCoords.txt");
+			coordinate TMUcoords("TMUCoordsv2.txt");
 			searchAlgoTimer->start();
 			pathcell p = *TMUcoords.getLocation("LIB");
 			searchAlgorithm::getIntelligentPath(mapgrid, *width, *height, &path, *TMUcoords.getLocation("SLC"), *TMUcoords.getLocation("TRS"));
@@ -150,7 +150,7 @@ void menu() {
 			char** mapgrid = readGrid("map.txt", width, height);
 			std::vector<pathcell> path;
 			Timer* searchAlgoTimer = new Timer();
-			coordinate TMUcoords("TMUCoords.txt");
+			coordinate TMUcoords("TMUCoordsv2.txt");
 			searchAlgoTimer->start();
 			searchAlgorithm::getIntelligentPath(mapgrid, *width, *height, &path, *TMUcoords.getLocation(user), *TMUcoords.getLocation(dest));
 			searchAlgoTimer->stop();
