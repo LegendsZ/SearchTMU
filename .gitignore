@@ -15,3 +15,10 @@ SearchTMU/SearchTMU/x64/Debug/vc143.idb
 SearchTMU/SearchTMU/x64/Debug/vc143.pdb
 *.user
 *.ipch
+build/
+debug/
+release/
+out/
+.idea/
+cmake-build-debug/
+.DS_Store
