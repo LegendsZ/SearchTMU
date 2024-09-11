@@ -49,8 +49,21 @@ int main(int argc, char* argv[]){
             return 1;
         }
     }
-	Graph* graph = GraphUtils::readGraphFromFile(graphFilePath);
-	GraphUtils::printGraph(graph);
+	//Graph* graph = GraphUtils::readGraphFromFile(graphFilePath);
+	Graph* graph = GraphUtils::createNamedEmptyGraph("TestGraph");
+	GraphUtils::addNode(graph, "A");
+	GraphUtils::addNode(graph, "B");
+	GraphUtils::addNode(graph, "C");
+	GraphUtils::addNode(graph, "D");
+
+	GraphUtils::addEdge(graph, "A", "B", 1);
+	GraphUtils::addEdge(graph, "A", "C", 2);
+	GraphUtils::addEdge(graph, "A", "D", 3);
+	GraphUtils::addEdge(graph, "B", "C", 4);
+	GraphUtils::addEdge(graph, "B", "D", 5);
+	GraphUtils::addEdge(graph, "C", "D", 6);
+
+	printGraph(graph);
 
     std::cout << "Goodbye!\n";
     return 0;
